@@ -40,6 +40,11 @@ ia::ia() {
 
 }
 
+ia::~ia()
+{
+    delete cartas_ia;
+}
+
 void ia::setIa_dificultad(int newIa_dificultad)
 {
     this->ia_dificultad = newIa_dificultad;

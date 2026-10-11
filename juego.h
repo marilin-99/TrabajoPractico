@@ -16,7 +16,8 @@ private:
     vector <vector<int>> tabla_danio;
     carta* carta_ia;
     carta* carta_player;
-    static const TipoElemento elementos[3];
+    static const TipoElemento elementos[4];
+    //carta* carta_interfaz_pl;
 
 public:
     juego();
@@ -29,12 +30,14 @@ public:
     vector <carta> *getcartas_ia();
     vector <carta> *getcartas_player();
     void aplicar_danio();
-    vector <carta> *vector_cartas_player();
+
     void carta_interfaz(carta *carta_elegida);
     vector<vector<int> > getTabla_danio() const;
     void tabla_danio_ia();
     int validar_partida();
     carta* mostrar_carta_ia();
+    void reiniciar_cartas();
+    ~juego();
 };
 
 #endif // JUEGO_H

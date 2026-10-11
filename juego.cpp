@@ -8,12 +8,14 @@
 #include <QDebug>
 
 juego::juego() {
-    tabla_danio = tabla_danio = vector<vector<int>>(3, vector<int>(3));
+    tabla_danio = vector<vector<int>>(4, vector<int>(4));
     tabla_danio =
         {
-            {10, 20, 50},   // Fuego
-            {50, 10, 20},   // Agua
-            {20, 50, 10}    // Tierra
+            //              Fuego Agua Tierra Viento
+            /* Fuego */ {   10,    20,   50,    35 },
+            /* Agua  */ {   50,    10,   35,    20 },
+            /* Tierra*/ {   20,    35,   10,    50 },
+            /* Viento*/ {   35,    50,   20,    10 }
         };
     player = new persona();
     ia = nullptr;
@@ -21,6 +23,9 @@ juego::juego() {
 
 void juego::set_ia(int dificultad)
 {
+    delete ia;
+    ia = nullptr;
+
         switch(dificultad)
         {
         case 1:
@@ -79,6 +84,25 @@ carta* juego::mostrar_carta_ia()
     return this->carta_ia;
 }
 
+void juego::reiniciar_cartas()
+{
+    vector <carta> *cartas_player_vida = this->getcartas_player();
+    vector <carta> *cartas_ia_vida = this->getcartas_ia();
+
+    for(int i = 0; i<5; i++){
+        cartas_player_vida->at(i).setVida(100);
+        cartas_player_vida->at(i).cambia_estado();
+        cartas_ia_vida->at(i).setVida(100);
+        cartas_ia_vida->at(i).cambia_estado();
+    }
+}
+
+juego::~juego()
+{
+    delete ia;
+    delete player;
+}
+
 
 carta* juego::getcarta_player()
 {
@@ -91,22 +115,24 @@ carta* juego::getcarta_ia()
 }
 
 
-const TipoElemento juego::elementos[3] = {TipoElemento::FUEGO, TipoElemento::AGUA, TipoElemento::TIERRA};
+const TipoElemento juego::elementos[4] = {TipoElemento::FUEGO, TipoElemento::AGUA, TipoElemento::TIERRA, TipoElemento::VIENTO};
 void juego::repartir_cartas()
 {
-    TipoElemento tipo_random_ia;
-    for(int i=0; i<5; i++){
-        tipo_random_ia = elementos[rand() % 3];
+    // Eliminar las cartas de la partida anterior
+    this->player->getvectorcartas()->clear();
+    this->ia->getvectorcartas()->clear();
+
+    // Repartir cinco cartas nuevas a la IA
+    for (int i = 0; i < 5; i++) {
+        TipoElemento tipo_random_ia = elementos[rand() % 4];
         this->ia->setCartas(carta(tipo_random_ia));
     }
 
-
-    TipoElemento tipo_random_player;
-    for(int i=0; i<5; i++){
-        tipo_random_player = elementos[rand() % 3];
+    // Repartir cinco cartas nuevas al jugador
+    for (int i = 0; i < 5; i++) {
+        TipoElemento tipo_random_player = elementos[rand() % 4];
         this->player->setCartas(carta(tipo_random_player));
     }
-
 }
 
 void juego::validar_cartas()
@@ -135,10 +161,7 @@ void juego::aplicar_danio()
 
 }
 
-vector<carta> *juego::vector_cartas_player()
-{
-    return this->player->getvectorcartas();
-}
+
 
 void juego::carta_interfaz(carta *carta_elegida)
 {

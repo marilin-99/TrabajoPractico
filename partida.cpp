@@ -21,35 +21,56 @@ partida::partida(QWidget *parent)
 
     QGridLayout *layout = new QGridLayout(ui->centralwidget);
 
-
     // fila 0: botones arriba a la derecha
     QHBoxLayout *botonesLayout = new QHBoxLayout;
     botonesLayout->addWidget(ui->tabla_danio);
     botonesLayout->addWidget(ui->reglas);
 
-    // fijar tamaño para que no se estiren
     ui->tabla_danio->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     ui->reglas->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-
-    // agregar el layout de botones en la fila 0, ocupando columnas 5 y 6 (extremo derecho)
+    ui->tabla_danio->setFixedSize(160, 50);
+    ui->reglas->setFixedSize(160, 50);
     layout->addLayout(botonesLayout, 0, 5, 1, 2, Qt::AlignRight);
 
-    // fila 1: spacer vertical para separar botones y cartas
-    layout->addItem(new QSpacerItem(20, 60, QSizePolicy::Minimum, QSizePolicy::Expanding), 1, 0, 1, 7);
+    // fila 1: spacer
+    layout->addItem(new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Expanding), 1, 0, 1, 7);
 
-    // fila 2: cartas centradas
-    layout->addWidget(ui->carta_1, 5, 1, Qt::AlignCenter);
-    layout->addWidget(ui->carta_2, 5, 2, Qt::AlignCenter);
-    layout->addWidget(ui->carta_3, 5, 3, Qt::AlignCenter);
-    layout->addWidget(ui->carta_4, 5, 4, Qt::AlignCenter);
-    layout->addWidget(ui->carta_5, 5, 5, Qt::AlignCenter);
+    // Carta 1 + barra
+    QVBoxLayout *carta1Layout = new QVBoxLayout;
+    carta1Layout->addWidget(ui->carta_1, 0, Qt::AlignCenter);
+    carta1Layout->addWidget(ui->vidacarta_1, 0, Qt::AlignCenter);
 
-    // fila 3: barras de vida debajo de cada carta
-    layout->addWidget(ui->vidacarta_1, 6, 1);
-    layout->addWidget(ui->vidacarta_2, 6, 2);
-    layout->addWidget(ui->vidacarta_3, 6, 3);
-    layout->addWidget(ui->vidacarta_4, 6, 4);
-    layout->addWidget(ui->vidacarta_5, 6, 5);
+    // Carta 2 + barra
+    QVBoxLayout *carta2Layout = new QVBoxLayout;
+    carta2Layout->addWidget(ui->carta_2, 0, Qt::AlignCenter);
+    carta2Layout->addWidget(ui->vidacarta_2, 0, Qt::AlignCenter);
+
+    // Carta 3 + barra
+    QVBoxLayout *carta3Layout = new QVBoxLayout;
+    carta3Layout->addWidget(ui->carta_3, 0, Qt::AlignCenter);
+    carta3Layout->addWidget(ui->vidacarta_3, 0, Qt::AlignCenter);
+
+    // Carta 4 + barra
+    QVBoxLayout *carta4Layout = new QVBoxLayout;
+    carta4Layout->addWidget(ui->carta_4, 0, Qt::AlignCenter);
+    carta4Layout->addWidget(ui->vidacarta_4, 0, Qt::AlignCenter);
+
+    // Carta 5 + barra
+    QVBoxLayout *carta5Layout = new QVBoxLayout;
+    carta5Layout->addWidget(ui->carta_5, 0, Qt::AlignCenter);
+    carta5Layout->addWidget(ui->vidacarta_5, 0, Qt::AlignCenter);
+
+    // Agregar cada bloque al grid en la misma fila
+    layout->addLayout(carta1Layout, 5, 1);
+    layout->addLayout(carta2Layout, 5, 2);
+    layout->addLayout(carta3Layout, 5, 3);
+    layout->addLayout(carta4Layout, 5, 4);
+    layout->addLayout(carta5Layout, 5, 5);
+
+    ui->carta_ia->setFixedSize(200, 300);
+    layout->addWidget(ui->carta_ia, 2, 3, Qt::AlignCenter);
+
+    layout->addItem(new QSpacerItem(20, 50, QSizePolicy::Minimum, QSizePolicy::Expanding), 7, 0, 1, 7);
 
     // ajustar ancho de las barras al ancho de cada carta
     ui->vidacarta_1->setFixedWidth(ui->carta_1->width());
@@ -59,7 +80,6 @@ partida::partida(QWidget *parent)
     ui->vidacarta_5->setFixedWidth(ui->carta_5->width());
 
     ui->centralwidget->setLayout(layout);
-
 
 }
 
@@ -103,7 +123,7 @@ void partida::habilitar_vivas()
         ui->carta_5
     };
 
-    vector <carta> *cartas_player = this->juego.vector_cartas_player();
+    vector <carta> *cartas_player = this->juego.getcartas_player();
     for(int i=0; i<5; i++){
         if(cartas_player->at(i).getEstado()==true){
             botones[i]->setEnabled(1);
@@ -155,7 +175,8 @@ QMessageBox QPushButton {
 )");
 
         msg.exec();
-        QApplication::quit();
+        this->hide();
+        this->parentWidget()->showMaximized();
     }
     else if (resultado == 2)
     {
@@ -236,14 +257,23 @@ QMessageBox QPushButton {
 )");
 
         msg.exec();
-        QApplication::quit();
+        this->hide();
+        this->parentWidget()->showMaximized();
     }
+}
+
+void partida::reiniciar_cartas()
+{
+    this->juego.reiniciar_cartas();
+    this->actualizar_vida();
+    this->habilitar_vivas();
 }
 
 
 void partida::asignar_cartas()
 {
     this->juego.repartir_cartas();
+
     vector<carta> *cartas = this->juego.getcartas_player();
 
     QPushButton *botones[] = {
@@ -253,19 +283,22 @@ void partida::asignar_cartas()
         ui->carta_4,
         ui->carta_5
     };
+
     this->juego.tabla_danio_ia();
 
-    for (int i = 0; i < 5; i++)
-    {
+    for (int i = 0; i < 5; i++) {
         int tipo = static_cast<int>(cartas->at(i).getTipo());
 
         QString ruta = ":/disenios/" + QString::number(tipo) + ".png";
-
         QPixmap imagen(ruta);
 
         botones[i]->setIcon(QIcon(imagen));
-        botones[i]->setIconSize(botones[i]->size());   // Ajusta automáticamente al tamaño del botón
+        botones[i]->setIconSize(botones[i]->size());
+        botones[i]->setEnabled(true);
     }
+
+    ui->carta_ia->clear();
+    actualizar_vida();
 }
 
 void partida::actualizar_vida()
@@ -279,7 +312,7 @@ void partida::actualizar_vida()
     };
 
     for(int i=0; i<5; i++){
-        vector <carta> *cartas_player = this->juego.vector_cartas_player();
+        vector <carta> *cartas_player = this->juego.getcartas_player();
         int vida = cartas_player->at(i).get_vida();
         vidas[i]->setValue((vida));
 }
@@ -295,7 +328,7 @@ void partida::setDificultad_ia(int newDificultad_ia)
 void partida::jugar_carta(int index)
 {
     deshabilitar_botones();
-    vector<carta> *cartas_player = this->juego.vector_cartas_player();
+    vector<carta> *cartas_player = this->juego.getcartas_player();
     this->juego.carta_interfaz(&cartas_player->at(index));
     this->juego.turnos();
     actualizar_vida();
@@ -304,14 +337,7 @@ void partida::jugar_carta(int index)
     finalizar_partida();
 }
 
-void partida::habilitar_botones()
-{
-    this->ui->carta_1->setEnabled(1);
-    this->ui->carta_2->setEnabled(1);
-    this->ui->carta_3->setEnabled(1);
-    this->ui->carta_4->setEnabled(1);
-    this->ui->carta_5->setEnabled(1);
-}
+
 
 void partida::deshabilitar_botones()
 {
@@ -365,4 +391,6 @@ void partida::on_tabla_danio_clicked()
 {
     this->tabla->show();
 }
+
+
 

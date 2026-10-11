@@ -1,14 +1,13 @@
 #ifndef CARTA_H
 #define CARTA_H
 
-enum class TipoElemento { FUEGO, AGUA, TIERRA};
+enum class TipoElemento { FUEGO, AGUA, TIERRA, VIENTO};
 
 class carta
 {
 private:
     int vida;
     TipoElemento tipo;
-    //int tipo;
     bool estado;
 public:
     carta(TipoElemento tipo_);
@@ -17,6 +16,7 @@ public:
     void recibir_danio(int porcentaje); //resta vida.
     TipoElemento getTipo() const;
     bool getEstado() const;
+    void setVida(int newVida);
 };
 
 #endif // CARTA_H

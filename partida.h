@@ -1,13 +1,10 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 #include "juego.h"
-#include "carta.h"
 #include <QMainWindow>
 #include <QSoundEffect>
 #include "reglas.h"
 #include "tabla_danio_ventana.h"
-
-
 
 namespace Ui {
 class partida;
@@ -23,16 +20,14 @@ public:
     void asignar_cartas();
     void actualizar_vida();
 
-
-    void seleccion_carta();
     void setDificultad_ia(int newDificultad_ia);
 
     void jugar_carta(int index);
-    void habilitar_botones();
     void deshabilitar_botones();
     void mostrar_carta_ia();
     void habilitar_vivas();
     void finalizar_partida();
+    void reiniciar_cartas();
 
 private slots:
     void on_carta_1_clicked();

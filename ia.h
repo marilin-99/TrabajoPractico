@@ -13,6 +13,7 @@ private:
     vector <vector<int>> tabla_danio;
 public:
     ia();
+    virtual ~ia();
     virtual carta *tirar_carta()=0;
     void setIa_dificultad(int newIa_dificultad);
     void setcarta_player(carta* carta_player);

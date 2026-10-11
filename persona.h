@@ -10,8 +10,6 @@ private:
 public:
     persona();
     carta * tirar_carta() override;
-
-
     void setCarta_elegida(carta *newCarta_elegida);
     carta *getCarta_elegida() const;
 };

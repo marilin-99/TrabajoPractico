@@ -7,14 +7,14 @@ tabla_danio_ventana::tabla_danio_ventana(juego* tabla, QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Obtengo la tabla desde juego
+
     auto matriz = tabla->getTabla_danio();
 
     ui->tablaDanio->setRowCount(matriz.size());
     ui->tablaDanio->setColumnCount(matriz[0].size());
 
     QStringList encabezados;
-    encabezados << "Fuego" << "Agua" << "Tierra";
+    encabezados << "Fuego" << "Agua" << "Tierra"<< "Viento";
     ui->tablaDanio->setHorizontalHeaderLabels(encabezados);
     ui->tablaDanio->setVerticalHeaderLabels(encabezados);
 
@@ -24,18 +24,18 @@ tabla_danio_ventana::tabla_danio_ventana(juego* tabla, QWidget *parent)
         }
     }
 
-    // Bloqueamos la edicion
+
     ui->tablaDanio->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    // Se estiran las celdas para ocupar todo el espacio
+
     ui->tablaDanio->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tablaDanio->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    // Sacamos las barras scroll
+
     ui->tablaDanio->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->tablaDanio->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    // Diseño de encabezados y celdas
+
     ui->tablaDanio->setShowGrid(true);
     ui->tablaDanio->setGridStyle(Qt::SolidLine);
     ui->tablaDanio->setSelectionMode(QAbstractItemView::NoSelection);
@@ -46,7 +46,6 @@ tabla_danio_ventana::tabla_danio_ventana(juego* tabla, QWidget *parent)
         );
 
 
-    // Tamaño inicial
     this->resize(900, 700);
 
 

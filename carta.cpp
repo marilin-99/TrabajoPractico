@@ -1,5 +1,10 @@
 #include "carta.h"
 
+void carta::setVida(int newVida)
+{
+    vida = newVida;
+}
+
 carta::carta(TipoElemento tipo_)
 {
     this->tipo = tipo_;
@@ -24,6 +29,9 @@ void carta::cambia_estado()
     if(this->vida <= 0)
     {
         this->estado = false;
+    }
+    else{
+        this->estado = true;
     }
 }
 

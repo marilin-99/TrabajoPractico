@@ -317,11 +317,46 @@ QProgressBar::chunk {
    <widget class="QPushButton" name="tabla_danio">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>50</y>
-      <width>80</width>
-      <height>24</height>
+      <x>890</x>
+      <y>20</y>
+      <width>141</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #10b981,
+        stop:1 #065f46
+    );
+
+    color: white;
+
+    border: 2px solid #fde68a;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    padding: 8px;
+}
+
+QPushButton:hover {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #34d399,
+        stop:1 #047857
+    );
+
+    border: 2px solid white;
+}
+
+QPushButton:pressed {
+    background: #064e3b;
+}</string>
     </property>
     <property name="text">
      <string>tabla de daño</string>
@@ -330,11 +365,46 @@ QProgressBar::chunk {
    <widget class="QPushButton" name="reglas">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>90</y>
-      <width>80</width>
-      <height>24</height>
+      <x>1050</x>
+      <y>20</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #4f46e5,
+        stop:1 #312e81
+    );
+
+    color: white;
+
+    border: 2px solid #facc15;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    padding: 8px;
+}
+
+QPushButton:hover {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #6366f1,
+        stop:1 #4338ca
+    );
+
+    border: 2px solid white;
+}
+
+QPushButton:pressed {
+    background: #1e1b4b;
+}</string>
     </property>
     <property name="text">
      <string>reglas</string>
