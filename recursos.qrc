@@ -11,5 +11,6 @@
         <file>disenios/trofeo.png</file>
         <file>disenios/derrota.png</file>
         <file>disenios/3.png</file>
+        <file>disenios/empate.png</file>
     </qresource>
 </RCC>

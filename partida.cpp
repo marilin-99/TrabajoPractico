@@ -11,7 +11,6 @@
 #include <QVBoxLayout>
 
 
-
 partida::partida(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::partida)
@@ -239,6 +238,7 @@ void partida::habilitar_vivas()
 void partida::finalizar_partida()
 {
     int resultado = this->juego.validar_partida();
+
     if (resultado == 1)
     {
         QMessageBox msg(this);
@@ -365,7 +365,73 @@ QMessageBox QPushButton {
         this->hide();
         this->parentWidget()->showMaximized();
     }
+
+
+    //si el resultado es 3
+    else if(resultado == 3) {
+        QMessageBox msg(this);
+
+        msg.setWindowTitle("¡Empateee!");
+        msg.setText("¡Nadie gana! Empataste la partida :/");
+        msg.setIconPixmap(QPixmap(":/disenios/empate.png"));
+        msg.setStyleSheet(R"(
+    QMessageBox {
+        background: qlineargradient(
+            x1:0, y1:0,
+            x2:0, y2:1,
+            stop:0 #1e3a8a, /* Azul oscuro profundo */
+            stop:1 #172554  /* Azul marino */
+        );
+        border: 3px solid #60a5fa; /* Borde azul claro */
+        border-radius: 18px;
+    }
+
+    QMessageBox QLabel {
+        color: #eff6ff; /* Blanco con un ligero tono azul */
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    QMessageBox QPushButton {
+        background: qlineargradient(
+            x1:0, y1:0,
+            x2:0, y2:1,
+            stop:0 #3b82f6, /* Azul vibrante */
+            stop:1 #1d4ed8  /* Azul medio oscuro */
+        );
+        color: white;
+        border: 2px solid #bfdbfe; /* Borde celeste muy claro */
+        border-radius: 12px;
+        min-width: 120px;
+        min-height: 45px;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    QMessageBox QPushButton:hover {
+        background: qlineargradient(
+            x1:0, y1:0,
+            x2:0, y2:1,
+            stop:0 #60a5fa, /* Azul más claro al pasar el cursor */
+            stop:1 #2563eb  /* Azul vibrante */
+        );
+        border: 2px solid white;
+    }
+
+    QMessageBox QPushButton:pressed {
+        background: #1e40af; /* Azul oscuro al hacer clic */
+    }
+)");
+
+        msg.exec();
+        this->hide();
+        this->parentWidget()->showMaximized();
+    }
+
 }
+
+
+
 
 
 

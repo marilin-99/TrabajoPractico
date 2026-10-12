@@ -66,19 +66,6 @@
         </item>
        </widget>
       </item>
-      <item row="23" column="4">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item row="19" column="1" colspan="7">
        <widget class="QPushButton" name="IniciaPartida">
         <property name="enabled">
@@ -179,129 +166,18 @@ QPushButton:disabled {
         </property>
        </widget>
       </item>
-      <item row="23" column="1" colspan="3">
-       <widget class="QPushButton" name="tabla_danio_boton">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>250</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #1d4ed8,
-        stop:1 #071a52
-    );
-
-    color: #eff6ff;
-
-    border: 3px solid #60a5fa;
-    border-radius: 18px;
-
-    font-size: 20px;
-    font-weight: bold;
-
-    padding: 12px;
-}
-
-
-/* Hover */
-QPushButton:hover {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #3b82f6,
-        stop:1 #1e3a8a
-    );
-
-    border: 3px solid #dbeafe;
-
-    color: white;
-}
-
-
-/* Click */
-QPushButton:pressed {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #172554,
-        stop:1 #020617
-    );
-
-    border: 3px solid white;
-
-    padding-top: 15px;
-}
-
-
-/* Deshabilitado */
-QPushButton:disabled {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #374151,
-        stop:1 #111827
-    );
-
-    color: #6b7280;
-
-    border: 3px solid #4b5563;
-}</string>
-        </property>
-        <property name="text">
-         <string>tabla de daño</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" colspan="7">
-       <spacer name="verticalSpacer_7">
+      <item row="10" column="1" rowspan="9" colspan="7">
+       <spacer name="verticalSpacer_3">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Minimum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
           <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="24" column="1" colspan="7">
-       <spacer name="verticalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="8" rowspan="25">
-       <spacer name="horizontalSpacer_9">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
          </size>
         </property>
        </spacer>
@@ -400,13 +276,124 @@ QPushButton:disabled {
         </property>
        </widget>
       </item>
-      <item row="10" column="1" rowspan="9" colspan="7">
-       <spacer name="verticalSpacer_3">
+      <item row="21" column="1">
+       <widget class="QSpinBox" name="cantidad_cartas">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>25</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item row="23" column="1" colspan="3">
+       <widget class="QPushButton" name="tabla_danio_boton">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>250</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #1d4ed8,
+        stop:1 #071a52
+    );
+
+    color: #eff6ff;
+
+    border: 3px solid #60a5fa;
+    border-radius: 18px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 12px;
+}
+
+
+/* Hover */
+QPushButton:hover {
+
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #3b82f6,
+        stop:1 #1e3a8a
+    );
+
+    border: 3px solid #dbeafe;
+
+    color: white;
+}
+
+
+/* Click */
+QPushButton:pressed {
+
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #172554,
+        stop:1 #020617
+    );
+
+    border: 3px solid white;
+
+    padding-top: 15px;
+}
+
+
+/* Deshabilitado */
+QPushButton:disabled {
+
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #374151,
+        stop:1 #111827
+    );
+
+    color: #6b7280;
+
+    border: 3px solid #4b5563;
+}</string>
+        </property>
+        <property name="text">
+         <string>tabla de daño</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="25">
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1" colspan="7">
+       <spacer name="verticalSpacer_7">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Policy::Minimum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -416,8 +403,8 @@ QPushButton:disabled {
         </property>
        </spacer>
       </item>
-      <item row="0" column="0" rowspan="25">
-       <spacer name="horizontalSpacer_7">
+      <item row="0" column="8" rowspan="25">
+       <spacer name="horizontalSpacer_9">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
         </property>
@@ -442,18 +429,31 @@ QPushButton:disabled {
         </property>
        </spacer>
       </item>
-      <item row="21" column="1">
-       <widget class="QSpinBox" name="cantidad_cartas">
-        <property name="minimum">
-         <number>1</number>
+      <item row="23" column="4">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
-        <property name="maximum">
-         <number>25</number>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
         </property>
-        <property name="value">
-         <number>5</number>
+       </spacer>
+      </item>
+      <item row="24" column="1" colspan="7">
+       <spacer name="verticalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
         </property>
-       </widget>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>

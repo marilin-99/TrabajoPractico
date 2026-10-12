@@ -86,6 +86,9 @@ int juego::validar_partida()
         }
     }
 
+    if (player_perdio && ia_perdio)
+        return 3; // Empate.
+
     if (player_perdio)
         return 1; // Gana la IA.
 

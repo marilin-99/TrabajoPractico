@@ -22,7 +22,6 @@ reglas::reglas(QWidget *parent)
     ui->ReglasJuego->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     ui->ReglasJuego->setWordWrap(true); //
     ui->ReglasJuego->setStyleSheet("font-size: 18px; color: black;");
-
 }
 
 reglas::~reglas()
