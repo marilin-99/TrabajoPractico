@@ -8,85 +8,107 @@
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
 #include <QMessageBox>
+#include <QVBoxLayout>
+
+
 
 partida::partida(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::partida)
 {
     ui->setupUi(this);
+
     sonidoCarta.setSource(QUrl("qrc:/disenios/carta.wav"));
     sonidoCarta.setVolume(0.2);
+
     this->reglas = new class reglas(this);
     this->tabla = new tabla_danio_ventana(&this->juego, this);
 
     QGridLayout *layout = new QGridLayout(ui->centralwidget);
 
-    // fila 0: botones arriba a la derecha
+    // Botones superiores
     QHBoxLayout *botonesLayout = new QHBoxLayout;
     botonesLayout->addWidget(ui->tabla_danio);
     botonesLayout->addWidget(ui->reglas);
 
-    ui->tabla_danio->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    ui->reglas->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     ui->tabla_danio->setFixedSize(160, 50);
     ui->reglas->setFixedSize(160, 50);
-    layout->addLayout(botonesLayout, 0, 5, 1, 2, Qt::AlignRight);
 
-    // fila 1: spacer
-    layout->addItem(new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Expanding), 1, 0, 1, 7);
+    layout->addLayout(botonesLayout, 0, 0, 1, 7,
+                      Qt::AlignRight);
 
-    // Carta 1 + barra
-    QVBoxLayout *carta1Layout = new QVBoxLayout;
-    carta1Layout->addWidget(ui->carta_1, 0, Qt::AlignCenter);
-    carta1Layout->addWidget(ui->vidacarta_1, 0, Qt::AlignCenter);
-
-    // Carta 2 + barra
-    QVBoxLayout *carta2Layout = new QVBoxLayout;
-    carta2Layout->addWidget(ui->carta_2, 0, Qt::AlignCenter);
-    carta2Layout->addWidget(ui->vidacarta_2, 0, Qt::AlignCenter);
-
-    // Carta 3 + barra
-    QVBoxLayout *carta3Layout = new QVBoxLayout;
-    carta3Layout->addWidget(ui->carta_3, 0, Qt::AlignCenter);
-    carta3Layout->addWidget(ui->vidacarta_3, 0, Qt::AlignCenter);
-
-    // Carta 4 + barra
-    QVBoxLayout *carta4Layout = new QVBoxLayout;
-    carta4Layout->addWidget(ui->carta_4, 0, Qt::AlignCenter);
-    carta4Layout->addWidget(ui->vidacarta_4, 0, Qt::AlignCenter);
-
-    // Carta 5 + barra
-    QVBoxLayout *carta5Layout = new QVBoxLayout;
-    carta5Layout->addWidget(ui->carta_5, 0, Qt::AlignCenter);
-    carta5Layout->addWidget(ui->vidacarta_5, 0, Qt::AlignCenter);
-
-    // Agregar cada bloque al grid en la misma fila
-    layout->addLayout(carta1Layout, 5, 1);
-    layout->addLayout(carta2Layout, 5, 2);
-    layout->addLayout(carta3Layout, 5, 3);
-    layout->addLayout(carta4Layout, 5, 4);
-    layout->addLayout(carta5Layout, 5, 5);
-
+    // Carta de la IA
     ui->carta_ia->setFixedSize(200, 300);
-    layout->addWidget(ui->carta_ia, 2, 3, Qt::AlignCenter);
+    layout->addWidget(ui->carta_ia, 2, 0, 1, 7,
+                      Qt::AlignCenter);
 
-    layout->addItem(new QSpacerItem(20, 50, QSizePolicy::Minimum, QSizePolicy::Expanding), 7, 0, 1, 7);
+    // Layout dinámico para las cartas del jugador
+    layoutCartas = new QGridLayout;
+    layout->addLayout(layoutCartas, 5, 0, 1, 7);
 
-    // ajustar ancho de las barras al ancho de cada carta
-    ui->vidacarta_1->setFixedWidth(ui->carta_1->width());
-    ui->vidacarta_2->setFixedWidth(ui->carta_2->width());
-    ui->vidacarta_3->setFixedWidth(ui->carta_3->width());
-    ui->vidacarta_4->setFixedWidth(ui->carta_4->width());
-    ui->vidacarta_5->setFixedWidth(ui->carta_5->width());
+    // Espacio inferior
+    layout->setRowStretch(7, 1);
 
     ui->centralwidget->setLayout(layout);
-
 }
+
 
 partida::~partida()
 {
     delete ui;
 }
+
+
+
+void partida::crearBotonesCartas()
+{
+    // Quitar los layouts de las cartas anteriores
+    while (QLayoutItem *item = layoutCartas->takeAt(0)) {
+        delete item;
+    }
+
+    // Eliminar los botones y las barras anteriores
+    for (QPushButton *boton : botonesCartas) {
+        delete boton;
+    }
+
+    for (QProgressBar *barra : barrasVida) {
+        delete barra;
+    }
+
+    botonesCartas.clear();
+    barrasVida.clear();
+
+    for (int i = 0; i < cant_cartas; i++) {
+        QPushButton *boton = new QPushButton(ui->centralwidget);
+        QProgressBar *barra = new QProgressBar(ui->centralwidget);
+
+        boton->setFixedSize(120, 180);
+        boton->setIconSize(QSize(120, 180));
+
+        barra->setRange(0, 100);
+        barra->setValue(100);
+        barra->setFixedWidth(120);
+
+        QVBoxLayout *cartaLayout = new QVBoxLayout;
+        cartaLayout->addWidget(boton, 0, Qt::AlignCenter);
+        cartaLayout->addWidget(barra, 0, Qt::AlignCenter);
+
+        int fila = i / 5;
+        int columna = i % 5;
+
+        layoutCartas->addLayout(cartaLayout, fila, columna, 1, 1);
+
+        botonesCartas.push_back(boton);
+        barrasVida.push_back(barra);
+
+        connect(boton, &QPushButton::clicked, this, [this, i]() {
+            jugar_carta(i);
+        });
+    }
+}
+
+
 
 void partida::mostrar_carta_ia()
 {
@@ -113,23 +135,18 @@ void partida::mostrar_carta_ia()
     sonidoCarta.play();
 }
 
+
 void partida::habilitar_vivas()
 {
-    QPushButton *botones[] = {
-        ui->carta_1,
-        ui->carta_2,
-        ui->carta_3,
-        ui->carta_4,
-        ui->carta_5
-    };
+    vector<carta> *cartas = this->juego.getcartas_player();
 
-    vector <carta> *cartas_player = this->juego.getcartas_player();
-    for(int i=0; i<5; i++){
-        if(cartas_player->at(i).getEstado()==true){
-            botones[i]->setEnabled(1);
-        }
+    for (int i = 0; i < cant_cartas; i++) {
+        botonesCartas[i]->setEnabled(
+            cartas->at(i).getEstado()
+            );
     }
 }
+
 
 void partida::finalizar_partida()
 {
@@ -262,61 +279,46 @@ QMessageBox QPushButton {
     }
 }
 
-void partida::reiniciar_cartas()
-{
-    this->juego.reiniciar_cartas();
-    this->actualizar_vida();
-    this->habilitar_vivas();
-}
 
 
 void partida::asignar_cartas()
 {
+    this->juego.setCant_cartas(cant_cartas);
+
+    crearBotonesCartas();
+
     this->juego.repartir_cartas();
+    this->juego.tabla_danio_ia();
 
     vector<carta> *cartas = this->juego.getcartas_player();
 
-    QPushButton *botones[] = {
-        ui->carta_1,
-        ui->carta_2,
-        ui->carta_3,
-        ui->carta_4,
-        ui->carta_5
-    };
-
-    this->juego.tabla_danio_ia();
-
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < cant_cartas; i++) {
         int tipo = static_cast<int>(cartas->at(i).getTipo());
 
         QString ruta = ":/disenios/" + QString::number(tipo) + ".png";
         QPixmap imagen(ruta);
 
-        botones[i]->setIcon(QIcon(imagen));
-        botones[i]->setIconSize(botones[i]->size());
-        botones[i]->setEnabled(true);
+        botonesCartas[i]->setIcon(QIcon(imagen));
+        botonesCartas[i]->setEnabled(true);
     }
 
     ui->carta_ia->clear();
+
     actualizar_vida();
 }
 
+
+
 void partida::actualizar_vida()
 {
-    QProgressBar *vidas[] = {
-        ui->vidacarta_1,
-        ui->vidacarta_2,
-        ui->vidacarta_3,
-        ui->vidacarta_4,
-        ui->vidacarta_5
-    };
+    vector<carta> *cartas = this->juego.getcartas_player();
 
-    for(int i=0; i<5; i++){
-        vector <carta> *cartas_player = this->juego.getcartas_player();
-        int vida = cartas_player->at(i).get_vida();
-        vidas[i]->setValue((vida));
+    for (int i = 0; i < cant_cartas; i++) {
+        int vida = cartas->at(i).get_vida();
+        barrasVida[i]->setValue(vida);
+    }
 }
-}
+
 
 
 void partida::setDificultad_ia(int newDificultad_ia)
@@ -327,57 +329,41 @@ void partida::setDificultad_ia(int newDificultad_ia)
 
 void partida::jugar_carta(int index)
 {
-    deshabilitar_botones();
+    // Verificar que el índice sea válido.
+    if (index < 0 || index >= botonesCartas.size()) {
+        return;
+    }
+
     vector<carta> *cartas_player = this->juego.getcartas_player();
+
+    // No jugar una carta que ya está muerta.
+    if (!cartas_player->at(index).getEstado()) {
+        return;
+    }
+
+    deshabilitar_botones();
+
     this->juego.carta_interfaz(&cartas_player->at(index));
     this->juego.turnos();
+
     actualizar_vida();
-    habilitar_vivas();
     mostrar_carta_ia();
+
+    // Primero verificar si alguien gano
     finalizar_partida();
+
+    // Si la partida continúa, habilitar las cartas vivas.
+    habilitar_vivas();
 }
+
 
 
 
 void partida::deshabilitar_botones()
 {
-    this->ui->carta_1->setEnabled(0);
-    this->ui->carta_2->setEnabled(0);
-    this->ui->carta_3->setEnabled(0);
-    this->ui->carta_4->setEnabled(0);
-    this->ui->carta_5->setEnabled(0);
-}
-
-
-
-
-
-void partida::on_carta_1_clicked()
-{
-    jugar_carta(0);
-}
-
-
-void partida::on_carta_2_clicked()
-{
-    jugar_carta(1);
-}
-
-void partida::on_carta_3_clicked()
-{
-    jugar_carta(2);
-}
-
-
-void partida::on_carta_4_clicked()
-{
-    jugar_carta(3);
-}
-
-
-void partida::on_carta_5_clicked()
-{
-    jugar_carta(4);
+    for (QPushButton *boton : botonesCartas) {
+        boton->setEnabled(false);
+    }
 }
 
 
@@ -390,6 +376,11 @@ void partida::on_reglas_clicked()
 void partida::on_tabla_danio_clicked()
 {
     this->tabla->show();
+}
+
+void partida::setCant_cartas(int newCant_cartas)
+{
+    cant_cartas = qBound(1, newCant_cartas, 50);
 }
 
 

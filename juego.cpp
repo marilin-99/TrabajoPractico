@@ -7,6 +7,11 @@
 #include <vector>
 #include <QDebug>
 
+void juego::setCant_cartas(int newCant_cartas)
+{
+    cant_cartas = newCant_cartas;
+}
+
 juego::juego() {
     tabla_danio = vector<vector<int>>(4, vector<int>(4));
     tabla_danio =
@@ -61,22 +66,33 @@ int juego::validar_partida()
     bool player_perdio = true;
     bool ia_perdio = true;
 
-    for (int i = 0; i < 5; i++)
+    // Revisar todas las cartas del jugador.
+    for (int i = 0; i < cartas_player->size(); i++)
     {
         if (cartas_player->at(i).getEstado())
+        {
             player_perdio = false;
+            break;
+        }
+    }
 
+    // Revisar todas las cartas de la IA.
+    for (int i = 0; i < cartas_ia->size(); i++)
+    {
         if (cartas_ia->at(i).getEstado())
+        {
             ia_perdio = false;
+            break;
+        }
     }
 
-    if (player_perdio){
-        return 1;   // Gana la IA
-    }
-    if (ia_perdio){
-        return 2;   // Gana el jugador
-    }
-    return 0;       // La partida continúa
+    if (player_perdio)
+        return 1; // Gana la IA.
+
+    if (ia_perdio)
+        return 2; // Gana el jugador.
+
+    return 0; // La partida continúa.
 }
 
 carta* juego::mostrar_carta_ia()
@@ -84,18 +100,6 @@ carta* juego::mostrar_carta_ia()
     return this->carta_ia;
 }
 
-void juego::reiniciar_cartas()
-{
-    vector <carta> *cartas_player_vida = this->getcartas_player();
-    vector <carta> *cartas_ia_vida = this->getcartas_ia();
-
-    for(int i = 0; i<5; i++){
-        cartas_player_vida->at(i).setVida(100);
-        cartas_player_vida->at(i).cambia_estado();
-        cartas_ia_vida->at(i).setVida(100);
-        cartas_ia_vida->at(i).cambia_estado();
-    }
-}
 
 juego::~juego()
 {
@@ -123,13 +127,13 @@ void juego::repartir_cartas()
     this->ia->getvectorcartas()->clear();
 
     // Repartir cinco cartas nuevas a la IA
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < cant_cartas; i++) {
         TipoElemento tipo_random_ia = elementos[rand() % 4];
         this->ia->setCartas(carta(tipo_random_ia));
     }
 
     // Repartir cinco cartas nuevas al jugador
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < cant_cartas; i++) {
         TipoElemento tipo_random_player = elementos[rand() % 4];
         this->player->setCartas(carta(tipo_random_player));
     }

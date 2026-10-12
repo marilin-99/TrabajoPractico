@@ -3,8 +3,13 @@
 #include "juego.h"
 #include <QMainWindow>
 #include <QSoundEffect>
+#include "qprogressbar.h"
 #include "reglas.h"
 #include "tabla_danio_ventana.h"
+#include <QPushButton>
+#include <vector>
+#include <QGridLayout>
+#include <QVBoxLayout>
 
 namespace Ui {
 class partida;
@@ -27,30 +32,30 @@ public:
     void mostrar_carta_ia();
     void habilitar_vivas();
     void finalizar_partida();
-    void reiniciar_cartas();
+
+    void setCant_cartas(int newCant_cartas);
 
 private slots:
-    void on_carta_1_clicked();
-
-    void on_carta_2_clicked();
-
-    void on_carta_3_clicked();
-
-    void on_carta_4_clicked();
-
-    void on_carta_5_clicked();
-
     void on_reglas_clicked();
 
     void on_tabla_danio_clicked();
 
 private:
     Ui::partida *ui;
+    QGridLayout *layoutCartas;
+
+    QVector<QPushButton*> botonesCartas;
+    QVector<QProgressBar*> barrasVida;
+
     juego juego;
+    int cant_cartas=5;
     int dificultad_ia;
+
     QSoundEffect sonidoCarta;
     tabla_danio_ventana *tabla;
     reglas *reglas;
+
+    void crearBotonesCartas();
 };
 
 #endif // PARTIDA_H

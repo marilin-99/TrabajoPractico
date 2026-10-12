@@ -39,8 +39,8 @@ carta *ia_super::tirar_carta()
             cartas_asecinas.push_back(carta_ia);
         }
     }
-    //buscar asecina que menos daño reciba
 
+    //buscar asecina que menos daño reciba
     if(cartas_asecinas.size() > 0){
         for(int i=0; i < cartas_asecinas.size(); i++){
             carta_ia = cartas_asecinas[i];

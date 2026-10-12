@@ -34,8 +34,8 @@ void MainWindow::on_IniciaPartida_clicked()
 void MainWindow::iniciar_partida()
 {
     this->accedePartida->setDificultad_ia(this->index);
-    this->accedePartida->asignar_cartas();
-
+    this->accedePartida->setCant_cartas(this->ui->cantidad_cartas->value());
+    this->accedePartida->asignar_cartas();  
     this->accedePartida->showMaximized();
     this->hide();
 }

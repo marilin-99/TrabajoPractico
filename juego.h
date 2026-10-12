@@ -17,6 +17,7 @@ private:
     carta* carta_ia;
     carta* carta_player;
     static const TipoElemento elementos[4];
+    int cant_cartas;
     //carta* carta_interfaz_pl;
 
 public:
@@ -36,8 +37,8 @@ public:
     void tabla_danio_ia();
     int validar_partida();
     carta* mostrar_carta_ia();
-    void reiniciar_cartas();
     ~juego();
+    void setCant_cartas(int newCant_cartas);
 };
 
 #endif // JUEGO_H
