@@ -10,14 +10,6 @@
 #include <vector>
 #include <QGridLayout>
 #include <QVBoxLayout>
-#include <QProgressBar>
-#include <QGridLayout>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QProgressBar>
-#include <QGridLayout>
-#include <QVBoxLayout>
-
 
 namespace Ui {
 class partida;
@@ -43,18 +35,14 @@ public:
 
     void setCant_cartas(int newCant_cartas);
 
-    void crearBotonesCartasIA();
-    void actualizar_vida_ia();
-    void actualizar_cartas_ia();
-
-
-    void crearCartasIA();
-    void actualizarVidaIA();
-
 private slots:
     void on_reglas_clicked();
 
     void on_tabla_danio_clicked();
+
+    void on_Guardar_clicked();
+
+    void on_Cargar_clicked();
 
 private:
     Ui::partida *ui;
@@ -62,11 +50,6 @@ private:
 
     QVector<QPushButton*> botonesCartas;
     QVector<QProgressBar*> barrasVida;
-
-    QGridLayout *layoutCartasIA;
-   vector<QLabel*> imagenesCartasIA;
-    vector<QProgressBar*> barrasVidaIA;
-
 
     juego juego;
     int cant_cartas=5;
@@ -77,6 +60,8 @@ private:
     reglas *reglas;
 
     void crearBotonesCartas();
+
+    void refrescar_interfaz();
 };
 
 #endif // PARTIDA_H

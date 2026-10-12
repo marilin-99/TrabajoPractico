@@ -5,6 +5,7 @@
 #include "carta.h"
 #include "ia.h"
 #include "persona.h"
+#include <string>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ private:
     static const TipoElemento elementos[4];
     int cant_cartas;
     //carta* carta_interfaz_pl;
+    int dificultad = 0;
 
 public:
     juego();
@@ -39,6 +41,8 @@ public:
     carta* mostrar_carta_ia();
     ~juego();
     void setCant_cartas(int newCant_cartas);
+    bool guardar_partida(const std::string &ruta);
+    bool cargar_partida(const std::string &ruta);
 };
 
 #endif // JUEGO_H

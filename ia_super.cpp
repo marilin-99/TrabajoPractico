@@ -11,7 +11,7 @@ carta *ia_super::tirar_carta()
 
     // Buscar la carta con mayor ventaja
     carta* mejor_carta=nullptr;
-    int menor = 999;
+    int menor = 0;
     int mayor = 0;
     vector<vector<int>> tabla_danio = this->getTabla_danio();
     carta* carta_ia;
@@ -45,7 +45,7 @@ carta *ia_super::tirar_carta()
         for(int i=0; i < cartas_asecinas.size(); i++){
             carta_ia = cartas_asecinas[i];
             int tipo_ia = static_cast<int>(carta_ia->getTipo());
-            if (tabla_danio[tipo_player][tipo_ia] < menor) {
+            if(menor < tabla_danio[tipo_player][tipo_ia]){
                 menor = tabla_danio[tipo_player][tipo_ia];
                 mejor_carta = carta_ia;
             }
