@@ -500,8 +500,6 @@ void partida::jugar_carta(int index)
     finalizar_partida();
 }
 
-
-
 void partida::deshabilitar_botones()
 {
     for (QPushButton *boton : botonesCartas) {
@@ -519,6 +517,12 @@ void partida::on_reglas_clicked()
 void partida::on_tabla_danio_clicked()
 {
     this->tabla->show();
+}
+
+void partida::setNombre(const QString &newNombre)
+{
+    this->nombre = newNombre;
+    this->ui->nombre_player->setText(newNombre);
 }
 
 void partida::setCant_cartas(int newCant_cartas)

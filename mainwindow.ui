@@ -455,6 +455,9 @@ QPushButton:disabled {
         </property>
        </spacer>
       </item>
+      <item row="5" column="1">
+       <widget class="QTextEdit" name="caja_nombre"/>
+      </item>
      </layout>
     </item>
    </layout>

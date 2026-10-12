@@ -51,6 +51,8 @@ public:
     void crearCartasIA();
     void actualizarVidaIA();
 
+    void setNombre(const QString &newNombre);
+
 private slots:
     void on_reglas_clicked();
 
@@ -60,13 +62,14 @@ private:
     Ui::partida *ui;
     QGridLayout *layoutCartas;
 
+    QString nombre;
+
     QVector<QPushButton*> botonesCartas;
     QVector<QProgressBar*> barrasVida;
 
     QGridLayout *layoutCartasIA;
    vector<QLabel*> imagenesCartasIA;
     vector<QProgressBar*> barrasVidaIA;
-
 
     juego juego;
     int cant_cartas=5;

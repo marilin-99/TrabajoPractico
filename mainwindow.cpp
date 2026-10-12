@@ -35,6 +35,7 @@ void MainWindow::iniciar_partida()
 {
     this->accedePartida->setDificultad_ia(this->index);
     this->accedePartida->setCant_cartas(this->ui->cantidad_cartas->value());
+    this->accedePartida->setNombre(this->ui->caja_nombre->toPlainText());
     this->accedePartida->asignar_cartas();  
     this->accedePartida->showMaximized();
     this->hide();

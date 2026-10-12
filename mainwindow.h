@@ -10,6 +10,7 @@
 #include "tabla_danio_ventana.h"
 #include "juego.h"
 #include "reglas.h"
+#include <Qstring>
 
 namespace Ui {
 class MainWindow;
@@ -30,8 +31,6 @@ private slots:
     void on_IniciaPartida_clicked();
     void iniciar_partida();
 
-
-
     void on_tabla_danio_boton_clicked();
 
     void on_reglas_clicked();
@@ -44,6 +43,7 @@ private:
     juego juego;
     int index = 0;
     reglas *reglas;
+    QString nombre;
 };
 
 #endif // MAINWINDOW_H
