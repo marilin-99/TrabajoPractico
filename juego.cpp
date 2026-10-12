@@ -6,19 +6,7 @@
 #include <ctime>
 #include <vector>
 #include <QDebug>
-#include <fstream>
-struct strCarta {
-    int tipo;
-    int vida;
-    bool estado;
-};
 
-struct strCabecera {
-    int dificultad;
-    int cant_cartas;
-    int n_player;
-    int n_ia;
-};
 void juego::setCant_cartas(int newCant_cartas)
 {
     cant_cartas = newCant_cartas;
@@ -36,15 +24,10 @@ juego::juego() {
         };
     player = new persona();
     ia = nullptr;
-    carta_ia = nullptr;
-    carta_player = nullptr;
-    cant_cartas = 5;
-
 }
 
 void juego::set_ia(int dificultad)
 {
-    this->dificultad = dificultad;
     delete ia;
     ia = nullptr;
 
@@ -198,79 +181,6 @@ void juego::turnos()
     validar_cartas();
 }
 
-bool juego::guardar_partida(const std::string &ruta)
-{
-    if (!ia) return false;
 
-    std::ofstream archivo(ruta, std::ios::binary | std::ios::trunc);
-    if (!archivo.is_open()) return false;
-
-    vector<carta> *cp = getcartas_player();
-    vector<carta> *ci = getcartas_ia();
-
-    strCabecera cab;
-    cab.dificultad  = dificultad;
-    cab.cant_cartas = cant_cartas;
-    cab.n_player    = cp->size();
-    cab.n_ia        = ci->size();
-    archivo.write((char*)&cab, sizeof(strCabecera));
-
-    for (carta &c : *cp) {
-        strCarta sc;
-        sc.tipo   = static_cast<int>(c.getTipo());
-        sc.vida   = c.get_vida();
-        sc.estado = c.getEstado();
-        archivo.write((char*)&sc, sizeof(strCarta));
-    }
-    for (carta &c : *ci) {
-        strCarta sc;
-        sc.tipo   = static_cast<int>(c.getTipo());
-        sc.vida   = c.get_vida();
-        sc.estado = c.getEstado();
-        archivo.write((char*)&sc, sizeof(strCarta));
-    }
-    archivo.close();
-    return true;
-}
-
-bool juego::cargar_partida(const std::string &ruta)
-{
-    std::ifstream archivo(ruta, std::ios::binary);
-    if (!archivo.is_open()) return false;
-
-    strCabecera cab;
-    archivo.read((char*)&cab, sizeof(strCabecera));
-    if (!archivo || cab.dificultad < 1 || cab.dificultad > 3) return false;
-
-    vector<carta> cartas_pl, cartas_ia;
-    strCarta sc;
-
-    for (int i = 0; i < cab.n_player; i++) {
-        archivo.read((char*)&sc, sizeof(strCarta));
-        if (!archivo) return false;
-        carta c(static_cast<TipoElemento>(sc.tipo));
-        c.setVida(sc.vida);
-        c.cambia_estado();
-        cartas_pl.push_back(c);
-    }
-    for (int i = 0; i < cab.n_ia; i++) {
-        archivo.read((char*)&sc, sizeof(strCarta));
-        if (!archivo) return false;
-        carta c(static_cast<TipoElemento>(sc.tipo));
-        c.setVida(sc.vida);
-        c.cambia_estado();
-        cartas_ia.push_back(c);
-    }
-
-    cant_cartas = cab.cant_cartas;
-    set_ia(cab.dificultad);
-    tabla_danio_ia();
-    *getcartas_player() = cartas_pl;
-    *getcartas_ia() = cartas_ia;
-    player->setCarta_elegida(nullptr);
-    carta_player = nullptr;
-    carta_ia = nullptr;
-    return true;
-}
 
 

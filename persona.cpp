@@ -1,8 +1,6 @@
 #include "persona.h"
 
-persona::persona() {
-    carta_elegida = nullptr;
-}
+persona::persona() {}
 
 void persona::setCarta_elegida(carta *newCarta_elegida)
 {
