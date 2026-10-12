@@ -1,0 +1,153 @@
+diff --git a/ia.cpp b/ia.cpp
+index c1da84c..1661082 100644
+--- a/ia.cpp
++++ b/ia.cpp
+@@ -42,7 +42,7 @@ ia::ia() {
+ 
+ ia::~ia()
+ {
+-    delete cartas_ia;
++    // Las cartas viven en el vector que hereda de jugador y se liberan solas.
+ }
+ 
+ void ia::setIa_dificultad(int newIa_dificultad)
+diff --git a/ia.h b/ia.h
+index 3f26bfa..e8ae933 100644
+--- a/ia.h
++++ b/ia.h
+@@ -7,9 +7,8 @@
+ class ia : public jugador
+ {
+ private:
+-    int ia_dificultad;
++    int ia_dificultad=0;
+     carta *carta_player=nullptr;
+-    vector <carta> *cartas_ia;
+     vector <vector<int>> tabla_danio;
+ public:
+     ia();
+diff --git a/ia_aleatoria.cpp b/ia_aleatoria.cpp
+index e96597a..2b63fd6 100644
+--- a/ia_aleatoria.cpp
++++ b/ia_aleatoria.cpp
+@@ -6,14 +6,6 @@ ia_aleatoria::ia_aleatoria() {}
+ 
+ carta *ia_aleatoria::tirar_carta()
+ {
+-    static bool inicializado = false;
+-
+-    if(!inicializado)
+-    {
+-        srand(time(NULL));
+-        inicializado = true;
+-    }
+-
+     vector<carta*> cartas_ia = this->vectorcartasvivas();
+ 
+     if (cartas_ia.empty()) {
+diff --git a/juego.cpp b/juego.cpp
+index cdabc67..ec1e272 100644
+--- a/juego.cpp
++++ b/juego.cpp
+@@ -125,6 +125,13 @@ carta* juego::getcarta_ia()
+ const TipoElemento juego::elementos[4] = {TipoElemento::FUEGO, TipoElemento::AGUA, TipoElemento::TIERRA, TipoElemento::VIENTO};
+ void juego::repartir_cartas()
+ {
++    // Los punteros a cartas apuntan dentro de los vectores: al limpiarlos
++    // quedarían colgando, así que se anulan antes.
++    this->carta_player = nullptr;
++    this->carta_ia = nullptr;
++    this->player->setCarta_elegida(nullptr);
++    this->ia->setcarta_player(nullptr);
++
+     // Eliminar las cartas de la partida anterior
+     this->player->getvectorcartas()->clear();
+     this->ia->getvectorcartas()->clear();
+diff --git a/juego.h b/juego.h
+index ba5eb69..284c35a 100644
+--- a/juego.h
++++ b/juego.h
+@@ -11,13 +11,13 @@ using namespace std;
+ class juego
+ {
+ private:
+-    ia* ia;
+-    persona* player;
++    ia* ia = nullptr;
++    persona* player = nullptr;
+     vector <vector<int>> tabla_danio;
+-    carta* carta_ia;
+-    carta* carta_player;
++    carta* carta_ia = nullptr;
++    carta* carta_player = nullptr;
+     static const TipoElemento elementos[4];
+-    int cant_cartas;
++    int cant_cartas = 5;
+     //carta* carta_interfaz_pl;
+ 
+ public:
+diff --git a/jugador.h b/jugador.h
+index 88d208c..d2061bd 100644
+--- a/jugador.h
++++ b/jugador.h
+@@ -11,6 +11,7 @@ private:
+     vector<carta> cartas;
+ public:
+     jugador();
++    virtual ~jugador() = default;
+     void estado_cartas();
+     carta getcartas(int index);
+     virtual carta* tirar_carta()=0;
+diff --git a/main.cpp b/main.cpp
+index a121f02..a21b7a6 100644
+--- a/main.cpp
++++ b/main.cpp
+@@ -2,11 +2,16 @@
+ #include "partida.h"
+ #include "juego.h"
+ #include <QApplication>
++#include <cstdlib>
++#include <ctime>
+ 
+ 
+ 
+ int main(int argc, char *argv[])
+-{   
++{
++    // Semilla única para todo el programa (reparto de cartas e IA aleatoria)
++    srand(static_cast<unsigned>(time(nullptr)));
++
+     QApplication a(argc, argv);
+     MainWindow w;
+     w.show();
+diff --git a/mainwindow.cpp b/mainwindow.cpp
+index 21a3dfe..65ea425 100644
+--- a/mainwindow.cpp
++++ b/mainwindow.cpp
+@@ -44,7 +44,9 @@ void MainWindow::iniciar_partida()
+ 
+ void MainWindow::on_tabla_danio_boton_clicked()
+ {
+-    this->tabla = new tabla_danio_ventana(&this->juego);
++    // Se crea una sola vez (con parent, Qt la libera) en lugar de una ventana nueva por clic
++    if (!this->tabla)
++        this->tabla = new tabla_danio_ventana(&this->juego, this);
+     this->tabla->show();
+ }
+ 
+diff --git a/mainwindow.h b/mainwindow.h
+index 7211a83..e119c94 100644
+--- a/mainwindow.h
++++ b/mainwindow.h
+@@ -40,9 +40,9 @@ private:
+     Ui::MainWindow *ui;
+     partida *accedePartida;
+     ia *IA_elegida;
+-    tabla_danio_ventana *tabla;
++    tabla_danio_ventana *tabla = nullptr;
+     juego juego;
+-    int index;
++    int index = 0;
+     reglas *reglas;
+ };
+ 
