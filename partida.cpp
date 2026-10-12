@@ -64,6 +64,7 @@ partida::~partida()
 }
 
 
+
 void partida::crearCartasIA()
 {
     // Eliminar los elementos anteriores del layout
