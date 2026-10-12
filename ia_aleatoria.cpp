@@ -6,14 +6,6 @@ ia_aleatoria::ia_aleatoria() {}
 
 carta *ia_aleatoria::tirar_carta()
 {
-    static bool inicializado = false;
-
-    if(!inicializado)
-    {
-        srand(time(NULL));
-        inicializado = true;
-    }
-
     vector<carta*> cartas_ia = this->vectorcartasvivas();
 
     if (cartas_ia.empty()) {

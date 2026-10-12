@@ -11,13 +11,13 @@ using namespace std;
 class juego
 {
 private:
-    ia* ia;
-    persona* player;
+    ia* ia = nullptr;
+    persona* player = nullptr;
     vector <vector<int>> tabla_danio;
-    carta* carta_ia;
-    carta* carta_player;
+    carta* carta_ia = nullptr;
+    carta* carta_player = nullptr;
     static const TipoElemento elementos[4];
-    int cant_cartas;
+    int cant_cartas = 5;
     //carta* carta_interfaz_pl;
 
 public:

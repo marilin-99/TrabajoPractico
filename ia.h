@@ -7,9 +7,8 @@
 class ia : public jugador
 {
 private:
-    int ia_dificultad;
+    int ia_dificultad=0;
     carta *carta_player=nullptr;
-    vector <carta> *cartas_ia;
     vector <vector<int>> tabla_danio;
 public:
     ia();

@@ -11,6 +11,7 @@ private:
     vector<carta> cartas;
 public:
     jugador();
+    virtual ~jugador() = default;
     void estado_cartas();
     carta getcartas(int index);
     virtual carta* tirar_carta()=0;

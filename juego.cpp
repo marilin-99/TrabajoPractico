@@ -125,6 +125,13 @@ carta* juego::getcarta_ia()
 const TipoElemento juego::elementos[4] = {TipoElemento::FUEGO, TipoElemento::AGUA, TipoElemento::TIERRA, TipoElemento::VIENTO};
 void juego::repartir_cartas()
 {
+    // Los punteros a cartas apuntan dentro de los vectores: al limpiarlos
+    // quedarían colgando, así que se anulan antes.
+    this->carta_player = nullptr;
+    this->carta_ia = nullptr;
+    this->player->setCarta_elegida(nullptr);
+    this->ia->setcarta_player(nullptr);
+
     // Eliminar las cartas de la partida anterior
     this->player->getvectorcartas()->clear();
     this->ia->getvectorcartas()->clear();

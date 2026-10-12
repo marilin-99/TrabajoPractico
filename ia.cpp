@@ -42,7 +42,7 @@ ia::ia() {
 
 ia::~ia()
 {
-    delete cartas_ia;
+    // Las cartas viven en el vector que hereda de jugador y se liberan solas.
 }
 
 void ia::setIa_dificultad(int newIa_dificultad)

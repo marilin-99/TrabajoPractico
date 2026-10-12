@@ -40,9 +40,9 @@ private:
     Ui::MainWindow *ui;
     partida *accedePartida;
     ia *IA_elegida;
-    tabla_danio_ventana *tabla;
+    tabla_danio_ventana *tabla = nullptr;
     juego juego;
-    int index;
+    int index = 0;
     reglas *reglas;
 };
 

@@ -44,7 +44,9 @@ void MainWindow::iniciar_partida()
 
 void MainWindow::on_tabla_danio_boton_clicked()
 {
-    this->tabla = new tabla_danio_ventana(&this->juego);
+    // Se crea una sola vez (con parent, Qt la libera) en lugar de una ventana nueva por clic
+    if (!this->tabla)
+        this->tabla = new tabla_danio_ventana(&this->juego, this);
     this->tabla->show();
 }
 
