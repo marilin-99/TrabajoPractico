@@ -1,6 +1,4 @@
 #include "ia_aleatoria.h"
-#include "qdebug.h"
-#include "qlogging.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -17,6 +15,10 @@ carta *ia_aleatoria::tirar_carta()
     }
 
     vector<carta*> cartas_ia = this->vectorcartasvivas();
+
+    if (cartas_ia.empty()) {
+        return nullptr;
+    }
 
     return cartas_ia[rand() % cartas_ia.size()];
 }
