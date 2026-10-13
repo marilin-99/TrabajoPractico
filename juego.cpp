@@ -26,10 +26,16 @@ juego::juego() {
     ia = nullptr;
 }
 
+int juego::getDificultad() const
+{
+    return dificultad_actual;
+}
+
 void juego::set_ia(int dificultad)
 {
     delete ia;
     ia = nullptr;
+    dificultad_actual = dificultad;
 
         switch(dificultad)
         {

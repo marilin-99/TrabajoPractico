@@ -1,5 +1,6 @@
 #include "partida.h"
 #include "ui_partida.h"
+#include "guardado.h"
 #include <QMessageBox>
 #include <QApplication>
 #include <QGridLayout>
@@ -517,6 +518,25 @@ void partida::on_reglas_clicked()
 void partida::on_tabla_danio_clicked()
 {
     this->tabla->show();
+}
+
+void partida::on_guardar_partida_clicked()
+{
+    // Se toma una "foto" de la partida tal como está en este momento
+    datos_partida datos;
+    datos.nombre = this->nombre.trimmed().toStdString();
+    datos.dificultad_ia = this->juego.getDificultad();
+    datos.cartas_player = *this->juego.getcartas_player();
+    datos.cartas_ia = *this->juego.getcartas_ia();
+
+    QString ruta;
+    QString error;
+    if (guardado::guardar(datos, &ruta, &error)) {
+        QMessageBox::information(this, "Partida guardada",
+                                 "La partida se guardó en:\n" + ruta);
+    } else {
+        QMessageBox::warning(this, "No se pudo guardar", error);
+    }
 }
 
 void partida::setNombre(const QString &newNombre)

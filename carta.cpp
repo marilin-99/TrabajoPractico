@@ -35,7 +35,7 @@ void carta::cambia_estado()
     }
 }
 
-int carta::get_vida()
+int carta::get_vida() const
 {
     return this->vida;
 }

@@ -6,6 +6,8 @@ QT += multimedia
 
 SOURCES += \
         carta.cpp \
+        formato_partida.cpp \
+        guardado.cpp \
         ia.cpp \
         ia_aleatoria.cpp \
         ia_estrategica.cpp \
@@ -21,6 +23,8 @@ SOURCES += \
 
 HEADERS += \
     carta.h \
+    formato_partida.h \
+    guardado.h \
     ia.h \
     ia_aleatoria.h \
     ia_estrategica.h \

@@ -18,11 +18,13 @@ private:
     carta* carta_player = nullptr;
     static const TipoElemento elementos[4];
     int cant_cartas = 5;
+    int dificultad_actual = 0; // 1 aleatoria, 2 estratégica, 3 super (0 = sin IA)
     //carta* carta_interfaz_pl;
 
 public:
     juego();
     void set_ia(int dificultad);
+    int getDificultad() const;
     void repartir_cartas();
     void turnos();
     carta *getcarta_player();

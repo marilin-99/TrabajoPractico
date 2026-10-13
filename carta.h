@@ -12,7 +12,7 @@ private:
 public:
     carta(TipoElemento tipo_);
     void cambia_estado(); //true si vida > 0
-    int get_vida();
+    int get_vida() const;
     void recibir_danio(int porcentaje); //resta vida.
     TipoElemento getTipo() const;
     bool getEstado() const;

@@ -58,6 +58,8 @@ private slots:
 
     void on_tabla_danio_clicked();
 
+    void on_guardar_partida_clicked();
+
 private:
     Ui::partida *ui;
     QGridLayout *layoutCartas;
