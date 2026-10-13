@@ -5,7 +5,12 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QPushButton>
+#include "configuracion.h"
+#include "lectorconfiguracion.h"
+#include <QCoreApplication>
+#include <QDebug>
 
+using namespace std;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -15,6 +20,23 @@ MainWindow::MainWindow(QWidget *parent)
     this->accedePartida = new partida(this);
     ui->IniciaPartida->setEnabled(0);
     this->reglas = new class reglas(this);
+
+    const string ruta = (QCoreApplication::applicationDirPath() + "/configuracion.txt").toStdString();
+    Configuracion config(this->juego.getTabla_danio(), ui->cantidad_cartas->value());
+    LectorConfiguracion lector;
+    if(!lector.leer(ruta, config)){
+        lector.escribir_archivo(ruta, config);
+    }
+    for(const auto& e: lector.errores()){
+        qDebug() << QString::fromStdString(e);
+    }
+    this->juego.aplicar_configuracion(config);
+    this->accedePartida->aplicar_configuracion(config);
+
+    ui->cantidad_cartas->setValue(config.get_cantidad());
+    if(config.tiene_tipo_ia()){
+        ui->elegir_IA->setCurrentIndex(config.get_tipo_ia());
+    }
 
     // Botón "cargar_partida": se usa el del .ui si existe; si no, se crea uno
     // debajo del de iniciar partida, con el mismo estilo.

@@ -57,6 +57,8 @@ public:
     // Reanuda una partida guardada (nombre, IA, cartas y vidas).
     void cargar_partida(const datos_partida &datos);
 
+    void aplicar_configuracion(const Configuracion& config);
+
 private slots:
     void on_reglas_clicked();
 

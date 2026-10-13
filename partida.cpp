@@ -495,6 +495,13 @@ void partida::cargar_partida(const datos_partida &datos)
     habilitar_vivas();   // las cartas eliminadas quedan deshabilitadas
 }
 
+void partida::aplicar_configuracion(const Configuracion &config)
+{
+    this->juego.aplicar_configuracion(config);
+    delete this->tabla;
+    this->tabla = new tabla_danio_ventana(&this->juego, this);
+}
+
 
 void partida::actualizar_vida()
 {

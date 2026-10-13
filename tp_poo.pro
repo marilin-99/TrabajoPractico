@@ -6,6 +6,7 @@ QT += multimedia
 
 SOURCES += \
         carta.cpp \
+        configuracion.cpp \
         dialogo_cargar.cpp \
         formato_partida.cpp \
         guardado.cpp \
@@ -15,6 +16,7 @@ SOURCES += \
         ia_super.cpp \
         juego.cpp \
         jugador.cpp \
+        lectorconfiguracion.cpp \
         main.cpp \
         mainwindow.cpp \
         partida.cpp \
@@ -24,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     carta.h \
+    configuracion.h \
     dialogo_cargar.h \
     formato_partida.h \
     guardado.h \
@@ -33,6 +36,7 @@ HEADERS += \
     ia_super.h \
     juego.h \
     jugador.h \
+    lectorconfiguracion.h \
     mainwindow.h \
     partida.h \
     persona.h \

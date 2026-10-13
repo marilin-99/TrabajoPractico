@@ -5,6 +5,7 @@
 #include "carta.h"
 #include "ia.h"
 #include "persona.h"
+#include <configuracion.h>
 
 using namespace std;
 
@@ -42,8 +43,10 @@ public:
     void tabla_danio_ia();
     int validar_partida();
     carta* mostrar_carta_ia();
+    void aplicar_configuracion(const Configuracion& config);
     ~juego();
     void setCant_cartas(int newCant_cartas);
+
 };
 
 #endif // JUEGO_H

@@ -24,6 +24,7 @@ juego::juego() {
         };
     player = new persona();
     ia = nullptr;
+    cant_cartas = 5;
 }
 
 int juego::getDificultad() const
@@ -107,6 +108,12 @@ int juego::validar_partida()
 carta* juego::mostrar_carta_ia()
 {
     return this->carta_ia;
+}
+
+void juego::aplicar_configuracion(const Configuracion &config)
+{
+    setCant_cartas(config.get_cantidad());
+    tabla_danio = config.get_tabla();
 }
 
 
