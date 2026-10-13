@@ -6,6 +6,7 @@ QT += multimedia
 
 SOURCES += \
         carta.cpp \
+        dialogo_cargar.cpp \
         formato_partida.cpp \
         guardado.cpp \
         ia.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     carta.h \
+    dialogo_cargar.h \
     formato_partida.h \
     guardado.h \
     ia.h \

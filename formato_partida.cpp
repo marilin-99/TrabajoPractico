@@ -24,6 +24,111 @@ void escribir_cartas(std::string &salida, const std::vector<carta> &cartas)
     }
 }
 
+const int MAX_CARTAS = 50;   // el mismo tope que usa partida::setCant_cartas
+const int BYTES_POR_CARTA = 5;
+const char *const INCOMPLETO = "El archivo está incompleto o dañado.";
+
+// Va leyendo los bytes de a poco y avisa (false) si se quiere leer más de lo que hay.
+class lector
+{
+public:
+    explicit lector(const std::string &bytes) : bytes_(bytes) {}
+
+    size_t restante() const { return bytes_.size() - pos_; }
+
+    bool u8(std::uint8_t &valor)
+    {
+        if (restante() < 1)
+            return false;
+        valor = static_cast<std::uint8_t>(bytes_[pos_++]);
+        return true;
+    }
+
+    bool u32(std::uint32_t &valor)
+    {
+        if (restante() < 4)
+            return false;
+        valor = 0;
+        for (int i = 0; i < 4; i++)
+            valor |= static_cast<std::uint32_t>(static_cast<std::uint8_t>(bytes_[pos_++])) << (8 * i);
+        return true;
+    }
+
+    bool u64(std::uint64_t &valor)
+    {
+        if (restante() < 8)
+            return false;
+        valor = 0;
+        for (int i = 0; i < 8; i++)
+            valor |= static_cast<std::uint64_t>(static_cast<std::uint8_t>(bytes_[pos_++])) << (8 * i);
+        return true;
+    }
+
+    bool texto(size_t largo, std::string &valor)
+    {
+        if (restante() < largo)
+            return false;
+        valor.assign(bytes_, pos_, largo);
+        pos_ += largo;
+        return true;
+    }
+
+private:
+    const std::string &bytes_;
+    size_t pos_ = 0;
+};
+
+bool leer_cartas(lector &in, std::vector<carta> &cartas, std::string &error)
+{
+    std::uint32_t cantidad = 0;
+    if (!in.u32(cantidad)) {
+        error = INCOMPLETO;
+        return false;
+    }
+    if (cantidad < 1 || cantidad > static_cast<std::uint32_t>(MAX_CARTAS)) {
+        error = "La cantidad de cartas no es válida.";
+        return false;
+    }
+    // Antes de leer se comprueba que los bytes alcanzan para todas las cartas
+    if (in.restante() / BYTES_POR_CARTA < cantidad) {
+        error = INCOMPLETO;
+        return false;
+    }
+
+    for (std::uint32_t i = 0; i < cantidad; i++) {
+        std::uint8_t tipo = 0;
+        std::uint32_t vida_bits = 0;
+        if (!in.u8(tipo) || !in.u32(vida_bits)) {
+            error = INCOMPLETO;
+            return false;
+        }
+        const int vida = static_cast<std::int32_t>(vida_bits);   // entero con signo
+
+        if (tipo > 3) {
+            error = "Hay una carta con un tipo de elemento inválido.";
+            return false;
+        }
+        if (vida < 0 || vida > 100) {
+            error = "Hay una carta con una vida inválida.";
+            return false;
+        }
+
+        carta c(static_cast<TipoElemento>(tipo));
+        c.setVida(vida);
+        c.cambia_estado();     // vida 0 = carta eliminada
+        cartas.push_back(c);
+    }
+    return true;
+}
+
+bool alguna_viva(const std::vector<carta> &cartas)
+{
+    for (const carta &c : cartas)
+        if (c.getEstado())
+            return true;
+    return false;
+}
+
 } // namespace
 
 std::string serializar_partida(const datos_partida &datos)
@@ -79,4 +184,71 @@ std::string nombre_de_archivo(const std::string &nombre)
         limpio = "sin_nombre";
 
     return "partida_" + limpio + ".bin";
+}
+
+bool leer_partida(const std::string &bytes, datos_partida &datos, std::string &error)
+{
+    datos = datos_partida();
+    error.clear();
+
+    datos_partida leida;
+    lector in(bytes);
+
+    std::string marca;
+    if (!in.texto(4, marca) || marca != "TPPG") {
+        error = "No es un archivo de partida guardada.";
+        return false;
+    }
+
+    std::uint32_t version = 0;
+    if (!in.u32(version)) {
+        error = INCOMPLETO;
+        return false;
+    }
+    if (version != 1) {
+        error = "El archivo es de una versión que este juego no entiende (versión " +
+                std::to_string(version) + ").";
+        return false;
+    }
+
+    std::uint64_t fecha = 0;
+    std::uint32_t dificultad_bits = 0;
+    std::uint32_t largo_nombre = 0;
+    if (!in.u64(fecha) || !in.u32(dificultad_bits) || !in.u32(largo_nombre)) {
+        error = INCOMPLETO;
+        return false;
+    }
+
+    const int dificultad = static_cast<std::int32_t>(dificultad_bits);
+    if (dificultad < 1 || dificultad > 3) {
+        error = "La dificultad de la IA no es válida.";
+        return false;
+    }
+
+    if (!in.texto(largo_nombre, leida.nombre)) {
+        error = INCOMPLETO;
+        return false;
+    }
+
+    if (!leer_cartas(in, leida.cartas_player, error) ||
+        !leer_cartas(in, leida.cartas_ia, error))
+        return false;
+
+    if (leida.cartas_player.size() != leida.cartas_ia.size()) {
+        error = "El jugador y la IA tienen distinta cantidad de cartas.";
+        return false;
+    }
+    if (in.restante() != 0) {
+        error = "El archivo tiene datos de más.";
+        return false;
+    }
+    if (!alguna_viva(leida.cartas_player) || !alguna_viva(leida.cartas_ia)) {
+        error = "Esa partida ya había terminado.";
+        return false;
+    }
+
+    leida.fecha = static_cast<std::int64_t>(fecha);
+    leida.dificultad_ia = dificultad;
+    datos = leida;
+    return true;
 }

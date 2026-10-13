@@ -155,6 +155,20 @@ void juego::repartir_cartas()
     }
 }
 
+void juego::restaurar_cartas(const vector<carta> &cartas_player, const vector<carta> &cartas_ia)
+{
+    // Igual que en repartir_cartas: se anulan los punteros que apuntan dentro
+    // de los vectores antes de reemplazarlos.
+    this->carta_player = nullptr;
+    this->carta_ia = nullptr;
+    this->player->setCarta_elegida(nullptr);
+    this->ia->setcarta_player(nullptr);
+
+    *this->player->getvectorcartas() = cartas_player;
+    *this->ia->getvectorcartas() = cartas_ia;
+    this->cant_cartas = static_cast<int>(cartas_player.size());
+}
+
 void juego::validar_cartas()
 {
     this->carta_player->cambia_estado();

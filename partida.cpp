@@ -446,6 +446,19 @@ void partida::asignar_cartas()
     juego.repartir_cartas();
     juego.tabla_danio_ia();
 
+    cargar_iconos_cartas();
+    habilitar_vivas();   // al empezar todas están vivas
+
+    ui->carta_ia->clear();
+
+    actualizar_vida();
+    actualizarVidaIA();
+}
+
+
+// Pone en cada botón la imagen del elemento de su carta
+void partida::cargar_iconos_cartas()
+{
     vector<carta> *cartas = juego.getcartas_player();
 
     for (int i = 0; i < cant_cartas; i++) {
@@ -456,13 +469,30 @@ void partida::asignar_cartas()
             );
 
         botonesCartas[i]->setIcon(QIcon(imagen));
-        botonesCartas[i]->setEnabled(true);
     }
+}
 
+
+void partida::cargar_partida(const datos_partida &datos)
+{
+    // La IA tiene que existir antes de restaurar las cartas
+    setDificultad_ia(datos.dificultad_ia);
+    setCant_cartas(static_cast<int>(datos.cartas_player.size()));
+    setNombre(QString::fromStdString(datos.nombre));
+    juego.setCant_cartas(cant_cartas);
+
+    crearBotonesCartas();
+    crearCartasIA();
+
+    juego.restaurar_cartas(datos.cartas_player, datos.cartas_ia);
+    juego.tabla_danio_ia();
+
+    cargar_iconos_cartas();
     ui->carta_ia->clear();
 
     actualizar_vida();
     actualizarVidaIA();
+    habilitar_vivas();   // las cartas eliminadas quedan deshabilitadas
 }
 
 

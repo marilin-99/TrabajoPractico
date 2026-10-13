@@ -35,6 +35,16 @@ struct datos_partida
 //   N veces:  1 byte tipo + 4 bytes vida
 std::string serializar_partida(const datos_partida &datos);
 
+// Interpreta los bytes de un archivo de partida (el formato de arriba).
+// Antes de aceptarlo revisa que el archivo sea válido: la marca y la versión,
+// que no esté incompleto ni tenga datos de más, y que los valores tengan
+// sentido (dificultad de 1 a 3, entre 1 y 50 cartas por lado y la misma
+// cantidad en ambos, tipo de 0 a 3, vida de 0 a 100 y al menos una carta
+// viva de cada lado, o sea una partida que todavía se puede jugar).
+// Si todo está bien devuelve true y completa "datos". Si no, devuelve false,
+// deja "datos" vacío y escribe el motivo en "error".
+bool leer_partida(const std::string &bytes, datos_partida &datos, std::string &error);
+
 // Nombre del archivo donde se guarda la partida de ese jugador, por ejemplo
 // "partida_Ana.bin". Saca los caracteres que no sirven en un nombre de
 // archivo, así que nunca puede apuntar a otra carpeta.
