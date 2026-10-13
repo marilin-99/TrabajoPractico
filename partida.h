@@ -64,6 +64,8 @@ private slots:
 
     void on_guardar_partida_clicked();
 
+    void on_menu_clicked();
+
 private:
     Ui::partida *ui;
     QGridLayout *layoutCartas;

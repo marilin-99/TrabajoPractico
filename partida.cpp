@@ -582,3 +582,10 @@ void partida::setCant_cartas(int newCant_cartas)
 
 
 
+
+void partida::on_menu_clicked()
+{
+    this->hide();
+    this->parentWidget()->showMaximized();
+}
+
