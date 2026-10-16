@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 
 using namespace std;
 LectorConfiguracion::LectorConfiguracion()
@@ -21,22 +22,25 @@ LectorConfiguracion::LectorConfiguracion()
                   };
 
     manejador = {
-                   {"cantidad_elementos",
-                    [](Configuracion& c, const string& v) { c.cantidad_elementos(convertir_a_entero(v)); }},
-                   {"tipo_ia",
-                    [this](Configuracion& c, const string& v) { interpretar_ia(c, v); }},
-                   {"dano",
-                    [this](Configuracion& c, const string& v) { interpretar_danio(c, v); }},
-                   };
+                 {"cantidad_elementos",
+                  [](Configuracion& c, const string& v) {
+                      bool exito = true;
+                      int val = convertir_a_entero(v, exito);
+                      if (exito) c.cantidad_elementos(val);
+                  }},
+                 {"tipo_ia",
+                  [this](Configuracion& c, const string& v) { interpretar_ia(c, v); }},
+                 {"dano",
+                  [this](Configuracion& c, const string& v) { interpretar_danio(c, v); }},
+                 };
 }
 
 bool LectorConfiguracion::leer(const string& ruta, Configuracion& config)
 {
-    lista_errores.clear();
-
+    this->ok = OK;
     ifstream archivo(ruta);
     if (!archivo) {
-        lista_errores.push_back("No se encontro '" + ruta + "'. Se usan los valores por defecto.");
+        ok = ERROR_APERTURA;
         return false;
     }
 
@@ -45,6 +49,9 @@ bool LectorConfiguracion::leer(const string& ruta, Configuracion& config)
     while (getline(archivo, linea)) {
         ++numero_linea;
         procesar_linea(config, linea, numero_linea);
+        if(this->ok != OK){
+            return false;
+        }
     }
     return true;
 }
@@ -53,9 +60,10 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
 {
     ofstream archivo(ruta);
     if (!archivo.is_open()) {
+        this->ok = ERROR_APERTURA;
         return;
     }
-
+    this->ok = OK;
     archivo << "Configuracion del juego\n";
     archivo << "Formato: clave=valor\n";
 
@@ -80,11 +88,6 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
     }
 }
 
-const vector<string>& LectorConfiguracion::errores() const
-{
-    return lista_errores;
-}
-
 void LectorConfiguracion::procesar_linea(Configuracion& config, const string& linea, int numero_linea)
 {
     const string texto = recortar(linea);
@@ -96,7 +99,7 @@ void LectorConfiguracion::procesar_linea(Configuracion& config, const string& li
 
     const auto pos_igual = texto.find('=');
     if (pos_igual == string::npos) {
-        lista_errores.push_back(prefijo + "falta el signo '='. Se ignora.");
+        this->ok = ERROR_FORMATO;
         return;
     }
 
@@ -105,19 +108,15 @@ void LectorConfiguracion::procesar_linea(Configuracion& config, const string& li
 
     const auto it = manejador.find(clave);
     if (it == manejador.end()) {
-        lista_errores.push_back(prefijo + "parametro desconocido '" + clave + "'. Se ignora.");
+        this->ok = ERROR_FORMATO;
         return;
     }
 
-    try {
-        it->second(config, valor);
-    } catch (const exception& e) {
-        lista_errores.push_back(prefijo + e.what() + ". Se ignora.");
-    }
+    it->second(config, valor);
 }
 
 // daño=Atacante,Defensor,Valor
-void LectorConfiguracion::interpretar_danio(Configuracion& config, const string& valor) const
+bool LectorConfiguracion::interpretar_danio(Configuracion& config, const string& valor) const
 {
     vector<string> partes;
     stringstream ss(valor);
@@ -126,19 +125,30 @@ void LectorConfiguracion::interpretar_danio(Configuracion& config, const string&
         partes.push_back(recortar(parte));
     }
     if (partes.size() != 3) {
-        throw invalid_argument("el daño debe tener formato Atacante,Defensor,Valor");
+        this->ok = ERROR_FORMATO;
+        return false;
+    }
+    int at = buscar_tipo(partes[0]);
+    int def = buscar_tipo(partes[1]);
+    if (this->ok != OK) return false;
+
+    bool exito = true;
+    int dano = convertir_a_entero(partes[2], exito);
+    if (!exito) {
+        this->ok = ARGUMENTO_INVALIDO;
+        return false;
     }
 
-    config.set_danio(static_cast<size_t>(buscar_tipo(partes[0])),
-                     static_cast<size_t>(buscar_tipo(partes[1])),
-                     convertir_a_entero(partes[2]));
+    config.set_danio(static_cast<size_t>(at), static_cast<size_t>(def), dano);
+    return true;
 }
 
-void LectorConfiguracion::interpretar_ia(Configuracion& config, const string& valor) const
+bool LectorConfiguracion::interpretar_ia(Configuracion& config, const string& valor) const
 {
     const auto it = indice_ias.find(minusculas(valor));
     if (it == indice_ias.end()) {
-        throw invalid_argument("tipo de IA desconocido '" + valor + "'");
+        this->ok = ARGUMENTO_INVALIDO;
+        return false;
     }
     config.tipo_ia(it->second);
 }
@@ -147,23 +157,25 @@ int LectorConfiguracion::buscar_tipo(const string& nombre) const
 {
     const auto it = indice_tipos.find(minusculas(nombre));
     if (it == indice_tipos.end()) {
-        throw invalid_argument("tipo de elemento desconocido '" + nombre + "'");
+        this->ok = ARGUMENTO_INVALIDO;
+        return -1;
     }
     return it->second;
 }
 
-int LectorConfiguracion::convertir_a_entero(const string& texto)
+int LectorConfiguracion::convertir_a_entero(const string& texto, bool& exito)
 {
     size_t usados = 0;
     int numero = 0;
     try {
         numero = stoi(texto, &usados);
     } catch (const exception&) {
-        throw invalid_argument("'" + texto + "' no es un numero valido");
+        exito = false;
     }
     if (usados != texto.size()) {
-        throw invalid_argument("'" + texto + "' no es un numero valido");
+        exito = false;
     }
+    exito = true;
     return numero;
 }
 
@@ -181,4 +193,22 @@ string LectorConfiguracion::minusculas(string texto)
 {
     transform(texto.begin(), texto.end(), texto.begin(), [](unsigned char c) { return static_cast<char>(tolower(c)); });
     return texto;
+}
+
+string LectorConfiguracion::mensaje_error() const
+{
+    switch (this->ok) {
+    case OK:
+        return "fichero procesado correctamente. \n";
+        break;
+    case ERROR_APERTURA:
+        return "Error de apertura del archivo. \n";
+        break;
+    case ERROR_FORMATO:
+        return "Error de formato en la lectura del archivo. \n";
+        break;
+    case ARGUMENTO_INVALIDO:
+        return "El argumento ingresado no es valido. \n";
+    }
+    return "Estado desconocido. \n";
 }

@@ -27,9 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
     if(!lector.leer(ruta, config)){
         lector.escribir_archivo(ruta, config);
     }
-    for(const auto& e: lector.errores()){
-        qDebug() << QString::fromStdString(e);
-    }
+
+    qDebug() << QString::fromStdString(lector.mensaje_error());
+
     this->juego.aplicar_configuracion(config);
     this->accedePartida->aplicar_configuracion(config);
 
