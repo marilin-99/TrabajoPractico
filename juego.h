@@ -27,8 +27,7 @@ public:
     void set_ia(int dificultad);
     int getDificultad() const;
     void repartir_cartas();
-    // Reemplaza las cartas actuales por las de una partida guardada.
-    // Hay que haber llamado antes a set_ia().
+    // Reemplaza las cartas por las de una partida guardada (antes hay que llamar a set_ia)
     void restaurar_cartas(const vector<carta> &cartas_player, const vector<carta> &cartas_ia);
     void turnos();
     carta *getcarta_player();

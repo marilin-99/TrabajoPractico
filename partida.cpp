@@ -473,18 +473,16 @@ void partida::cargar_iconos_cartas()
 }
 
 
-void partida::cargar_partida(const datos_partida &datos)
+void partida::cargar_partida(const partida_guardada &guardada)
 {
-    // La IA tiene que existir antes de restaurar las cartas
-    setDificultad_ia(datos.dificultad_ia);
-    setCant_cartas(static_cast<int>(datos.cartas_player.size()));
-    setNombre(QString::fromStdString(datos.nombre));
-    juego.setCant_cartas(cant_cartas);
+    setDificultad_ia(guardada.dificultad);      // primero la IA, porque las cartas se le asignan después
+    setCant_cartas(guardada.cartas_player.size());
+    setNombre(guardada.nombre);
 
     crearBotonesCartas();
     crearCartasIA();
 
-    juego.restaurar_cartas(datos.cartas_player, datos.cartas_ia);
+    juego.restaurar_cartas(guardada.cartas_player, guardada.cartas_ia);
     juego.tabla_danio_ia();
 
     cargar_iconos_cartas();
@@ -492,7 +490,7 @@ void partida::cargar_partida(const datos_partida &datos)
 
     actualizar_vida();
     actualizarVidaIA();
-    habilitar_vivas();   // las cartas eliminadas quedan deshabilitadas
+    habilitar_vivas();      // las cartas sin vida quedan deshabilitadas
 }
 
 void partida::aplicar_configuracion(const Configuracion &config)
@@ -559,21 +557,16 @@ void partida::on_tabla_danio_clicked()
 
 void partida::on_guardar_partida_clicked()
 {
-    // Se toma una "foto" de la partida tal como está en este momento
-    datos_partida datos;
-    datos.nombre = this->nombre.trimmed().toStdString();
-    datos.dificultad_ia = this->juego.getDificultad();
-    datos.cartas_player = *this->juego.getcartas_player();
-    datos.cartas_ia = *this->juego.getcartas_ia();
+    partida_guardada guardada;
+    guardada.nombre = this->nombre.trimmed();
+    guardada.dificultad = this->juego.getDificultad();
+    guardada.cartas_player = *this->juego.getcartas_player();
+    guardada.cartas_ia = *this->juego.getcartas_ia();
 
-    QString ruta;
-    QString error;
-    if (guardado::guardar(datos, &ruta, &error)) {
-        QMessageBox::information(this, "Partida guardada",
-                                 "La partida se guardó en:\n" + ruta);
-    } else {
-        QMessageBox::warning(this, "No se pudo guardar", error);
-    }
+    if (guardado::guardar(guardada))
+        QMessageBox::information(this, "Partida guardada", "La partida se guardó correctamente.");
+    else
+        QMessageBox::warning(this, "Error", "No se pudo guardar la partida.");
 }
 
 void partida::setNombre(const QString &newNombre)

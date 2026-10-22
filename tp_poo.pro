@@ -8,7 +8,6 @@ SOURCES += \
         carta.cpp \
         configuracion.cpp \
         dialogo_cargar.cpp \
-        formato_partida.cpp \
         guardado.cpp \
         ia.cpp \
         ia_aleatoria.cpp \
@@ -28,7 +27,6 @@ HEADERS += \
     carta.h \
     configuracion.h \
     dialogo_cargar.h \
-    formato_partida.h \
     guardado.h \
     ia.h \
     ia_aleatoria.h \

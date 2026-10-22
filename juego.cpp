@@ -164,8 +164,7 @@ void juego::repartir_cartas()
 
 void juego::restaurar_cartas(const vector<carta> &cartas_player, const vector<carta> &cartas_ia)
 {
-    // Igual que en repartir_cartas: se anulan los punteros que apuntan dentro
-    // de los vectores antes de reemplazarlos.
+    // Los punteros apuntan a las cartas viejas: se anulan antes de reemplazarlas
     this->carta_player = nullptr;
     this->carta_ia = nullptr;
     this->player->setCarta_elegida(nullptr);

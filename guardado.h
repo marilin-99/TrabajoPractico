@@ -3,40 +3,27 @@
 
 #include <QString>
 #include <vector>
-#include "formato_partida.h"
+#include "carta.h"
 
-// Una partida leída de la carpeta de partidas.
+using namespace std;
+
+// Los datos que se guardan de una partida
 struct partida_guardada
 {
-    QString ruta;          // archivo del que se leyó
-    datos_partida datos;   // su contenido, ya validado
+    QString nombre;                 // nombre del jugador
+    int dificultad = 0;             // 1 aleatoria, 2 estratégica, 3 super
+    vector<carta> cartas_player;    // cartas del jugador con su vida
+    vector<carta> cartas_ia;        // cartas de la IA con su vida
 };
 
-// Guarda y carga las partidas en archivos binarios (el formato está explicado
-// en formato_partida.h). Acá solo se decide dónde van los archivos y se leen
-// o escriben.
 class guardado
 {
 public:
-    // Carpeta "partidas", dentro de la carpeta donde está el juego (junto al ejecutable).
-    static QString carpeta();
+    // Guarda la partida en un archivo binario. Devuelve false si no pudo.
+    static bool guardar(const partida_guardada &partida);
 
-    // Escribe la partida en <carpeta>/partida_<nombre>.bin (si ya existía una
-    // del mismo jugador, la reemplaza). Devuelve true si salió bien; si no,
-    // deja el motivo en *error. En *ruta queda la ruta del archivo escrito.
-    static bool guardar(const datos_partida &datos,
-                        QString *ruta = nullptr,
-                        QString *error = nullptr);
-
-    // Lee un archivo de partida y comprueba que sea válido. Si no lo es,
-    // devuelve false y deja el motivo en *error.
-    static bool cargar(const QString &ruta,
-                       datos_partida &datos,
-                       QString *error = nullptr);
-
-    // Todas las partidas válidas de la carpeta, la más reciente primero.
-    // En *danadas queda cuántos archivos no se pudieron leer.
-    static std::vector<partida_guardada> listar(int *danadas = nullptr);
+    // Devuelve todas las partidas guardadas que se pudieron leer
+    static vector<partida_guardada> listar();
 };
 
 #endif // GUARDADO_H

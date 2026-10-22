@@ -35,8 +35,7 @@ private slots:
 
     void on_reglas_clicked();
 
-    // Botón "cargar_partida": deja elegir una partida guardada y la reanuda
-    void cargar_partida_guardada();
+    void on_cargar_partida_clicked();
 
 private:
     Ui::MainWindow *ui;

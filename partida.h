@@ -1,7 +1,7 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 #include "juego.h"
-#include "formato_partida.h"
+#include "guardado.h"
 #include <QMainWindow>
 #include <QSoundEffect>
 #include "qprogressbar.h"
@@ -54,8 +54,8 @@ public:
 
     void setNombre(const QString &newNombre);
 
-    // Reanuda una partida guardada (nombre, IA, cartas y vidas).
-    void cargar_partida(const datos_partida &datos);
+    // Continúa una partida guardada
+    void cargar_partida(const partida_guardada &guardada);
 
     void aplicar_configuracion(const Configuracion& config);
 
