@@ -1,0 +1,916 @@
+diff --git a/dialogo_cargar.cpp b/dialogo_cargar.cpp
+index 819c438..5ec508c 100644
+--- a/dialogo_cargar.cpp
++++ b/dialogo_cargar.cpp
+@@ -1,22 +1,10 @@
+ #include "dialogo_cargar.h"
+-#include <QDateTime>
+ #include <QDialogButtonBox>
+ #include <QLabel>
++#include <QPushButton>
+ #include <QVBoxLayout>
+ 
+-static QString nombre_dificultad(int dificultad)
+-{
+-    switch (dificultad) {
+-    case 1: return "IA Aleatoria";
+-    case 2: return "IA Estratégica";
+-    case 3: return "IA Super";
+-    }
+-    return "IA";
+-}
+-
+-dialogo_cargar::dialogo_cargar(const std::vector<partida_guardada> &partidas,
+-                               int danadas,
+-                               QWidget *parent)
++dialogo_cargar::dialogo_cargar(const vector<partida_guardada> &partidas, QWidget *parent)
+     : QDialog(parent)
+ {
+     setWindowTitle("Cargar partida");
+@@ -25,47 +13,27 @@ dialogo_cargar::dialogo_cargar(const std::vector<partida_guardada> &partidas,
+     QVBoxLayout *layout = new QVBoxLayout(this);
+     layout->addWidget(new QLabel("Elegí la partida que querés continuar:"));
+ 
++    // Una línea por partida: nombre - IA - cantidad de cartas
++    const char *nombres_ia[] = {"", "IA Aleatoria", "IA Estratégica", "IA Super"};
++
+     lista = new QListWidget;
+     for (const partida_guardada &p : partidas) {
+-        QString nombre = QString::fromStdString(p.datos.nombre);
+-        if (nombre.isEmpty())
+-            nombre = "(sin nombre)";
++        QString nombre = p.nombre.isEmpty() ? "(sin nombre)" : p.nombre;
+ 
+-        const QString fecha = QDateTime::fromSecsSinceEpoch(p.datos.fecha)
+-                                  .toString("dd/MM/yyyy HH:mm");
+-
+-        lista->addItem(nombre + "  -  " +
+-                       nombre_dificultad(p.datos.dificultad_ia) + "  -  " +
+-                       QString::number(static_cast<int>(p.datos.cartas_player.size())) +
+-                       " cartas  -  " + fecha);
++        lista->addItem(nombre + "  -  " + nombres_ia[p.dificultad] + "  -  " +
++                       QString::number(p.cartas_player.size()) + " cartas");
+     }
++    lista->setCurrentRow(0);        // empieza con la primera seleccionada
+     layout->addWidget(lista);
+ 
+-    if (danadas > 0) {
+-        layout->addWidget(new QLabel(
+-            "No se pudieron leer " + QString::number(danadas) +
+-            " archivo(s) de la carpeta (dañados o de otra versión)."));
+-    }
+-
+-    QDialogButtonBox *botones = new QDialogButtonBox;
+-    boton_cargar = botones->addButton("Cargar", QDialogButtonBox::AcceptRole);
+-    botones->addButton("Cancelar", QDialogButtonBox::RejectRole);
+-    boton_cargar->setEnabled(false);
++    QDialogButtonBox *botones = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
++    botones->button(QDialogButtonBox::Ok)->setText("Cargar");
++    botones->button(QDialogButtonBox::Cancel)->setText("Cancelar");
+     layout->addWidget(botones);
+ 
+     connect(botones, &QDialogButtonBox::accepted, this, &QDialog::accept);
+     connect(botones, &QDialogButtonBox::rejected, this, &QDialog::reject);
+-
+-    // "Cargar" solo se puede apretar si hay una partida seleccionada
+-    connect(lista, &QListWidget::currentRowChanged, this, [this](int fila) {
+-        boton_cargar->setEnabled(fila >= 0);
+-    });
+-    // Doble clic sobre una partida = cargarla
+-    connect(lista, &QListWidget::itemDoubleClicked, this, [this](QListWidgetItem *) {
+-        accept();
+-    });
+-
+-    lista->setCurrentRow(0);   // la más reciente queda seleccionada
++    connect(lista, &QListWidget::itemDoubleClicked, this, &QDialog::accept);   // doble clic = cargar
+ }
+ 
+ int dialogo_cargar::elegida() const
+diff --git a/dialogo_cargar.h b/dialogo_cargar.h
+index fe30cba..cef7faa 100644
+--- a/dialogo_cargar.h
++++ b/dialogo_cargar.h
+@@ -3,26 +3,20 @@
+ 
+ #include <QDialog>
+ #include <QListWidget>
+-#include <QPushButton>
+ #include <vector>
+ #include "guardado.h"
+ 
+-// Ventana para elegir cuál de las partidas guardadas se quiere cargar.
++// Mini ventana para elegir una de las partidas guardadas
+ class dialogo_cargar : public QDialog
+ {
+ public:
+-    // "danadas" es la cantidad de archivos de la carpeta que no se pudieron
+-    // leer (se avisa en la ventana).
+-    dialogo_cargar(const std::vector<partida_guardada> &partidas,
+-                   int danadas,
+-                   QWidget *parent = nullptr);
++    dialogo_cargar(const vector<partida_guardada> &partidas, QWidget *parent = nullptr);
+ 
+-    // Posición, dentro de la lista recibida, de la partida elegida (-1 si no hay).
++    // Posición de la partida elegida dentro del vector recibido
+     int elegida() const;
+ 
+ private:
+     QListWidget *lista;
+-    QPushButton *boton_cargar;
+ };
+ 
+ #endif // DIALOGO_CARGAR_H
+diff --git a/formato_partida.cpp b/formato_partida.cpp
+deleted file mode 100644
+index f0947ac..0000000
+--- a/formato_partida.cpp
++++ /dev/null
+@@ -1,254 +0,0 @@
+-#include "formato_partida.h"
+-
+-namespace {
+-
+-void escribir_u32(std::string &salida, std::uint32_t valor)
+-{
+-    for (int i = 0; i < 4; i++)
+-        salida.push_back(static_cast<char>((valor >> (8 * i)) & 0xFF));
+-}
+-
+-void escribir_u64(std::string &salida, std::uint64_t valor)
+-{
+-    for (int i = 0; i < 8; i++)
+-        salida.push_back(static_cast<char>((valor >> (8 * i)) & 0xFF));
+-}
+-
+-void escribir_cartas(std::string &salida, const std::vector<carta> &cartas)
+-{
+-    escribir_u32(salida, static_cast<std::uint32_t>(cartas.size()));
+-    for (const carta &c : cartas) {
+-        salida.push_back(static_cast<char>(static_cast<std::uint8_t>(c.getTipo())));
+-        // la vida va como entero de 32 bits con signo
+-        escribir_u32(salida, static_cast<std::uint32_t>(c.get_vida()));
+-    }
+-}
+-
+-const int MAX_CARTAS = 50;   // el mismo tope que usa partida::setCant_cartas
+-const int BYTES_POR_CARTA = 5;
+-const char *const INCOMPLETO = "El archivo está incompleto o dañado.";
+-
+-// Va leyendo los bytes de a poco y avisa (false) si se quiere leer más de lo que hay.
+-class lector
+-{
+-public:
+-    explicit lector(const std::string &bytes) : bytes_(bytes) {}
+-
+-    size_t restante() const { return bytes_.size() - pos_; }
+-
+-    bool u8(std::uint8_t &valor)
+-    {
+-        if (restante() < 1)
+-            return false;
+-        valor = static_cast<std::uint8_t>(bytes_[pos_++]);
+-        return true;
+-    }
+-
+-    bool u32(std::uint32_t &valor)
+-    {
+-        if (restante() < 4)
+-            return false;
+-        valor = 0;
+-        for (int i = 0; i < 4; i++)
+-            valor |= static_cast<std::uint32_t>(static_cast<std::uint8_t>(bytes_[pos_++])) << (8 * i);
+-        return true;
+-    }
+-
+-    bool u64(std::uint64_t &valor)
+-    {
+-        if (restante() < 8)
+-            return false;
+-        valor = 0;
+-        for (int i = 0; i < 8; i++)
+-            valor |= static_cast<std::uint64_t>(static_cast<std::uint8_t>(bytes_[pos_++])) << (8 * i);
+-        return true;
+-    }
+-
+-    bool texto(size_t largo, std::string &valor)
+-    {
+-        if (restante() < largo)
+-            return false;
+-        valor.assign(bytes_, pos_, largo);
+-        pos_ += largo;
+-        return true;
+-    }
+-
+-private:
+-    const std::string &bytes_;
+-    size_t pos_ = 0;
+-};
+-
+-bool leer_cartas(lector &in, std::vector<carta> &cartas, std::string &error)
+-{
+-    std::uint32_t cantidad = 0;
+-    if (!in.u32(cantidad)) {
+-        error = INCOMPLETO;
+-        return false;
+-    }
+-    if (cantidad < 1 || cantidad > static_cast<std::uint32_t>(MAX_CARTAS)) {
+-        error = "La cantidad de cartas no es válida.";
+-        return false;
+-    }
+-    // Antes de leer se comprueba que los bytes alcanzan para todas las cartas
+-    if (in.restante() / BYTES_POR_CARTA < cantidad) {
+-        error = INCOMPLETO;
+-        return false;
+-    }
+-
+-    for (std::uint32_t i = 0; i < cantidad; i++) {
+-        std::uint8_t tipo = 0;
+-        std::uint32_t vida_bits = 0;
+-        if (!in.u8(tipo) || !in.u32(vida_bits)) {
+-            error = INCOMPLETO;
+-            return false;
+-        }
+-        const int vida = static_cast<std::int32_t>(vida_bits);   // entero con signo
+-
+-        if (tipo > 3) {
+-            error = "Hay una carta con un tipo de elemento inválido.";
+-            return false;
+-        }
+-        if (vida < 0 || vida > 100) {
+-            error = "Hay una carta con una vida inválida.";
+-            return false;
+-        }
+-
+-        carta c(static_cast<TipoElemento>(tipo));
+-        c.setVida(vida);
+-        c.cambia_estado();     // vida 0 = carta eliminada
+-        cartas.push_back(c);
+-    }
+-    return true;
+-}
+-
+-bool alguna_viva(const std::vector<carta> &cartas)
+-{
+-    for (const carta &c : cartas)
+-        if (c.getEstado())
+-            return true;
+-    return false;
+-}
+-
+-} // namespace
+-
+-std::string serializar_partida(const datos_partida &datos)
+-{
+-    std::string salida;
+-
+-    salida.append("TPPG", 4);                                        // marca
+-    escribir_u32(salida, 1);                                         // versión
+-    escribir_u64(salida, static_cast<std::uint64_t>(datos.fecha));   // fecha
+-    escribir_u32(salida, static_cast<std::uint32_t>(datos.dificultad_ia));
+-
+-    escribir_u32(salida, static_cast<std::uint32_t>(datos.nombre.size()));
+-    salida.append(datos.nombre);
+-
+-    escribir_cartas(salida, datos.cartas_player);
+-    escribir_cartas(salida, datos.cartas_ia);
+-
+-    return salida;
+-}
+-
+-std::string nombre_de_archivo(const std::string &nombre)
+-{
+-    // Los espacios, los caracteres de control y los que no se pueden usar en
+-    // un nombre de archivo (\ / : * ? " < > |) pasan a ser "_". Los bytes de
+-    // letras con tilde u otros alfabetos (>= 0x80) se dejan como están.
+-    const std::string prohibidos = "\\/:*?\"<>|";
+-    std::string limpio;
+-    for (unsigned char c : nombre) {
+-        bool invalido = c < 0x20 || c == 0x7F || c == ' ' ||
+-                        prohibidos.find(static_cast<char>(c)) != std::string::npos;
+-        if (!invalido)
+-            limpio.push_back(static_cast<char>(c));
+-        else if (limpio.empty() || limpio.back() != '_')
+-            limpio.push_back('_');
+-    }
+-
+-    // Máximo 40 bytes, sin cortar una letra UTF-8 por la mitad
+-    if (limpio.size() > 40) {
+-        size_t corte = 40;
+-        while (corte > 0 && (static_cast<unsigned char>(limpio[corte]) & 0xC0) == 0x80)
+-            corte--;
+-        limpio.resize(corte);
+-    }
+-
+-    // Sin "_" ni "." al principio o al final
+-    size_t inicio = limpio.find_first_not_of("_.");
+-    if (inicio == std::string::npos)
+-        limpio.clear();
+-    else
+-        limpio = limpio.substr(inicio, limpio.find_last_not_of("_.") - inicio + 1);
+-
+-    if (limpio.empty())
+-        limpio = "sin_nombre";
+-
+-    return "partida_" + limpio + ".bin";
+-}
+-
+-bool leer_partida(const std::string &bytes, datos_partida &datos, std::string &error)
+-{
+-    datos = datos_partida();
+-    error.clear();
+-
+-    datos_partida leida;
+-    lector in(bytes);
+-
+-    std::string marca;
+-    if (!in.texto(4, marca) || marca != "TPPG") {
+-        error = "No es un archivo de partida guardada.";
+-        return false;
+-    }
+-
+-    std::uint32_t version = 0;
+-    if (!in.u32(version)) {
+-        error = INCOMPLETO;
+-        return false;
+-    }
+-    if (version != 1) {
+-        error = "El archivo es de una versión que este juego no entiende (versión " +
+-                std::to_string(version) + ").";
+-        return false;
+-    }
+-
+-    std::uint64_t fecha = 0;
+-    std::uint32_t dificultad_bits = 0;
+-    std::uint32_t largo_nombre = 0;
+-    if (!in.u64(fecha) || !in.u32(dificultad_bits) || !in.u32(largo_nombre)) {
+-        error = INCOMPLETO;
+-        return false;
+-    }
+-
+-    const int dificultad = static_cast<std::int32_t>(dificultad_bits);
+-    if (dificultad < 1 || dificultad > 3) {
+-        error = "La dificultad de la IA no es válida.";
+-        return false;
+-    }
+-
+-    if (!in.texto(largo_nombre, leida.nombre)) {
+-        error = INCOMPLETO;
+-        return false;
+-    }
+-
+-    if (!leer_cartas(in, leida.cartas_player, error) ||
+-        !leer_cartas(in, leida.cartas_ia, error))
+-        return false;
+-
+-    if (leida.cartas_player.size() != leida.cartas_ia.size()) {
+-        error = "El jugador y la IA tienen distinta cantidad de cartas.";
+-        return false;
+-    }
+-    if (in.restante() != 0) {
+-        error = "El archivo tiene datos de más.";
+-        return false;
+-    }
+-    if (!alguna_viva(leida.cartas_player) || !alguna_viva(leida.cartas_ia)) {
+-        error = "Esa partida ya había terminado.";
+-        return false;
+-    }
+-
+-    leida.fecha = static_cast<std::int64_t>(fecha);
+-    leida.dificultad_ia = dificultad;
+-    datos = leida;
+-    return true;
+-}
+diff --git a/formato_partida.h b/formato_partida.h
+deleted file mode 100644
+index 6df6e81..0000000
+--- a/formato_partida.h
++++ /dev/null
+@@ -1,53 +0,0 @@
+-#ifndef FORMATO_PARTIDA_H
+-#define FORMATO_PARTIDA_H
+-
+-#include <cstdint>
+-#include <string>
+-#include <vector>
+-#include "carta.h"
+-
+-// Todo lo necesario para poder reanudar una partida más adelante.
+-struct datos_partida
+-{
+-    std::string nombre;                // nombre del jugador (texto UTF-8)
+-    std::int64_t fecha = 0;            // segundos desde 1970 (0 = que se complete al guardar)
+-    int dificultad_ia = 0;             // 1 aleatoria, 2 estratégica, 3 super
+-    std::vector<carta> cartas_player;  // cartas del jugador con su vida actual
+-    std::vector<carta> cartas_ia;      // cartas de la IA con su vida actual
+-};
+-
+-// Convierte la partida en los bytes que se escriben en el archivo binario.
+-//
+-// Formato (todos los números enteros en little-endian):
+-//
+-//   4 bytes   marca "TPPG"
+-//   4 bytes   versión del formato (u32, hoy 1)
+-//   8 bytes   fecha: segundos desde 1970 (u64)
+-//   4 bytes   dificultad de la IA (i32)
+-//   4 bytes   largo del nombre en bytes (u32)  -> L
+-//   L bytes   nombre del jugador (UTF-8, sin terminador)
+-//   --- cartas del jugador ---
+-//   4 bytes   cantidad de cartas (u32)         -> N
+-//   N veces:  1 byte  tipo (0 fuego, 1 agua, 2 tierra, 3 viento)
+-//             4 bytes vida (i32; 0 = carta eliminada)
+-//   --- cartas de la IA (igual que las del jugador) ---
+-//   4 bytes   cantidad de cartas (u32)
+-//   N veces:  1 byte tipo + 4 bytes vida
+-std::string serializar_partida(const datos_partida &datos);
+-
+-// Interpreta los bytes de un archivo de partida (el formato de arriba).
+-// Antes de aceptarlo revisa que el archivo sea válido: la marca y la versión,
+-// que no esté incompleto ni tenga datos de más, y que los valores tengan
+-// sentido (dificultad de 1 a 3, entre 1 y 50 cartas por lado y la misma
+-// cantidad en ambos, tipo de 0 a 3, vida de 0 a 100 y al menos una carta
+-// viva de cada lado, o sea una partida que todavía se puede jugar).
+-// Si todo está bien devuelve true y completa "datos". Si no, devuelve false,
+-// deja "datos" vacío y escribe el motivo en "error".
+-bool leer_partida(const std::string &bytes, datos_partida &datos, std::string &error);
+-
+-// Nombre del archivo donde se guarda la partida de ese jugador, por ejemplo
+-// "partida_Ana.bin". Saca los caracteres que no sirven en un nombre de
+-// archivo, así que nunca puede apuntar a otra carpeta.
+-std::string nombre_de_archivo(const std::string &nombre);
+-
+-#endif // FORMATO_PARTIDA_H
+diff --git a/guardado.cpp b/guardado.cpp
+index 142159a..ef1dea9 100644
+--- a/guardado.cpp
++++ b/guardado.cpp
+@@ -1,104 +1,113 @@
+ #include "guardado.h"
+ #include <QCoreApplication>
++#include <QDataStream>
+ #include <QDir>
+ #include <QFile>
+-#include <QFileInfo>
+-#include <QSaveFile>
+-#include <algorithm>
+-#include <ctime>
+ 
+-QString guardado::carpeta()
++// Carpeta "partidas", dentro de la carpeta donde está el juego
++static QString carpeta()
+ {
+-    // Carpeta del ejecutable del juego + "/partidas"
+     return QCoreApplication::applicationDirPath() + "/partidas";
+ }
+ 
+-bool guardado::guardar(const datos_partida &datos, QString *ruta, QString *error)
++// El archivo se llama partida_<nombre>.bin.
++// Lo que no es letra ni número se cambia por "_" para que sea un nombre de archivo válido.
++static QString ruta_archivo(const QString &nombre)
+ {
+-    auto fallo = [error](const QString &motivo) {
+-        if (error)
+-            *error = motivo;
+-        return false;
+-    };
++    QString limpio;
++    for (QChar c : nombre.left(40)) {
++        if (c.isLetterOrNumber())
++            limpio += c;
++        else
++            limpio += '_';
++    }
++    if (limpio.isEmpty())
++        limpio = "sin_nombre";
+ 
+-    const QString dir = carpeta();
+-    if (!QDir().mkpath(dir))
+-        return fallo("No se pudo crear la carpeta " + QDir::toNativeSeparators(dir));
++    return carpeta() + "/partida_" + limpio + ".bin";
++}
+ 
+-    // Si no se indicó, la fecha es el momento en que se guarda
+-    datos_partida copia = datos;
+-    if (copia.fecha == 0)
+-        copia.fecha = static_cast<std::int64_t>(std::time(nullptr));
++// De cada carta se guarda el tipo y la vida
++static void escribir_cartas(QDataStream &out, const vector<carta> &cartas)
++{
++    for (const carta &c : cartas)
++        out << static_cast<int>(c.getTipo()) << c.get_vida();
++}
+ 
+-    const std::string bytes = serializar_partida(copia);
+-    const QString destino = dir + "/" + QString::fromStdString(nombre_de_archivo(copia.nombre));
++// Lee 'cantidad' cartas. Devuelve false si los datos están mal
++// o si no queda ninguna carta con vida (esa partida ya no se puede continuar).
++static bool leer_cartas(QDataStream &in, int cantidad, vector<carta> &cartas)
++{
++    bool hay_viva = false;
+ 
+-    // QSaveFile escribe a un archivo temporal y recién al final reemplaza el
+-    // original: si algo falla, no queda una partida guardada a medias.
+-    // (Se abre sin QIODevice::Text para que los bytes se escriban tal cual.)
+-    QSaveFile archivo(destino);
+-    if (!archivo.open(QIODevice::WriteOnly))
+-        return fallo("No se pudo abrir " + QDir::toNativeSeparators(destino) + ": " + archivo.errorString());
++    for (int i = 0; i < cantidad; i++) {
++        int tipo = 0;
++        int vida = 0;
++        in >> tipo >> vida;
++
++        if (in.status() != QDataStream::Ok || tipo < 0 || tipo > 3 || vida < 0 || vida > 100)
++            return false;
+ 
+-    const qint64 largo = static_cast<qint64>(bytes.size());
+-    if (archivo.write(bytes.data(), largo) != largo || !archivo.commit())
+-        return fallo("No se pudo escribir " + QDir::toNativeSeparators(destino) + ": " + archivo.errorString());
++        carta c(static_cast<TipoElemento>(tipo));
++        c.setVida(vida);
++        c.cambia_estado();      // si la vida es 0, la carta queda eliminada
++        cartas.push_back(c);
+ 
+-    if (ruta)
+-        *ruta = QDir::toNativeSeparators(destino);
+-    return true;
++        if (vida > 0)
++            hay_viva = true;
++    }
++    return hay_viva;
+ }
+ 
+-bool guardado::cargar(const QString &ruta, datos_partida &datos, QString *error)
++// Lee un archivo de partida. Si está dañado o lo modificaron a mano devuelve false,
++// así el juego no se rompe con datos incorrectos.
++static bool leer_partida(const QString &ruta, partida_guardada &partida)
+ {
+-    auto fallo = [error](const QString &motivo) {
+-        if (error)
+-            *error = motivo;
+-        return false;
+-    };
+-
+-    // Se abre sin QIODevice::Text para leer los bytes tal cual
+     QFile archivo(ruta);
+     if (!archivo.open(QIODevice::ReadOnly))
+-        return fallo("No se pudo abrir " + QDir::toNativeSeparators(ruta) + ": " + archivo.errorString());
++        return false;
+ 
+-    // Una partida ocupa unas pocas decenas de bytes: algo enorme no es una partida
+-    if (archivo.size() > 1024 * 1024)
+-        return fallo("El archivo es demasiado grande para ser una partida guardada.");
++    QDataStream in(&archivo);
++    int cantidad = 0;
++    in >> partida.nombre >> partida.dificultad >> cantidad;
+ 
+-    const QByteArray bytes = archivo.readAll();
+-    std::string motivo;
+-    if (!leer_partida(std::string(bytes.constData(), static_cast<size_t>(bytes.size())), datos, motivo))
+-        return fallo(QString::fromStdString(motivo));
++    if (in.status() != QDataStream::Ok || partida.dificultad < 1 || partida.dificultad > 3
++        || cantidad < 1 || cantidad > 50)
++        return false;
++
++    return leer_cartas(in, cantidad, partida.cartas_player)
++        && leer_cartas(in, cantidad, partida.cartas_ia);
++}
++
++bool guardado::guardar(const partida_guardada &partida)
++{
++    QDir().mkpath(carpeta());       // crea la carpeta si no existe
++
++    QFile archivo(ruta_archivo(partida.nombre));
++    if (!archivo.open(QIODevice::WriteOnly))
++        return false;
++
++    // Orden en el archivo: nombre, dificultad, cantidad de cartas,
++    // cartas del jugador y cartas de la IA
++    QDataStream out(&archivo);
++    out << partida.nombre << partida.dificultad << static_cast<int>(partida.cartas_player.size());
++    escribir_cartas(out, partida.cartas_player);
++    escribir_cartas(out, partida.cartas_ia);
+ 
+-    return true;
++    return out.status() == QDataStream::Ok;
+ }
+ 
+-std::vector<partida_guardada> guardado::listar(int *danadas)
++vector<partida_guardada> guardado::listar()
+ {
+-    std::vector<partida_guardada> partidas;
+-    int malas = 0;
++    vector<partida_guardada> partidas;
+ 
+-    const QDir dir(carpeta());
+-    const QFileInfoList archivos =
+-        dir.entryInfoList(QStringList() << "partida_*.bin", QDir::Files, QDir::Name);
++    QDir dir(carpeta());
++    QStringList archivos = dir.entryList(QStringList() << "partida_*.bin", QDir::Files);
+ 
+-    for (const QFileInfo &info : archivos) {
++    for (const QString &nombre_archivo : archivos) {
+         partida_guardada p;
+-        p.ruta = info.absoluteFilePath();
+-        if (cargar(p.ruta, p.datos, nullptr))
++        if (leer_partida(dir.filePath(nombre_archivo), p))
+             partidas.push_back(p);
+-        else
+-            malas++;
+     }
+-
+-    // La más reciente primero
+-    std::sort(partidas.begin(), partidas.end(),
+-              [](const partida_guardada &a, const partida_guardada &b) {
+-                  return a.datos.fecha > b.datos.fecha;
+-              });
+-
+-    if (danadas)
+-        *danadas = malas;
+     return partidas;
+ }
+diff --git a/guardado.h b/guardado.h
+index 6ab3284..b7915e1 100644
+--- a/guardado.h
++++ b/guardado.h
+@@ -3,40 +3,27 @@
+ 
+ #include <QString>
+ #include <vector>
+-#include "formato_partida.h"
++#include "carta.h"
+ 
+-// Una partida leída de la carpeta de partidas.
++using namespace std;
++
++// Los datos que se guardan de una partida
+ struct partida_guardada
+ {
+-    QString ruta;          // archivo del que se leyó
+-    datos_partida datos;   // su contenido, ya validado
++    QString nombre;                 // nombre del jugador
++    int dificultad = 0;             // 1 aleatoria, 2 estratégica, 3 super
++    vector<carta> cartas_player;    // cartas del jugador con su vida
++    vector<carta> cartas_ia;        // cartas de la IA con su vida
+ };
+ 
+-// Guarda y carga las partidas en archivos binarios (el formato está explicado
+-// en formato_partida.h). Acá solo se decide dónde van los archivos y se leen
+-// o escriben.
+ class guardado
+ {
+ public:
+-    // Carpeta "partidas", dentro de la carpeta donde está el juego (junto al ejecutable).
+-    static QString carpeta();
+-
+-    // Escribe la partida en <carpeta>/partida_<nombre>.bin (si ya existía una
+-    // del mismo jugador, la reemplaza). Devuelve true si salió bien; si no,
+-    // deja el motivo en *error. En *ruta queda la ruta del archivo escrito.
+-    static bool guardar(const datos_partida &datos,
+-                        QString *ruta = nullptr,
+-                        QString *error = nullptr);
+-
+-    // Lee un archivo de partida y comprueba que sea válido. Si no lo es,
+-    // devuelve false y deja el motivo en *error.
+-    static bool cargar(const QString &ruta,
+-                       datos_partida &datos,
+-                       QString *error = nullptr);
++    // Guarda la partida en un archivo binario. Devuelve false si no pudo.
++    static bool guardar(const partida_guardada &partida);
+ 
+-    // Todas las partidas válidas de la carpeta, la más reciente primero.
+-    // En *danadas queda cuántos archivos no se pudieron leer.
+-    static std::vector<partida_guardada> listar(int *danadas = nullptr);
++    // Devuelve todas las partidas guardadas que se pudieron leer
++    static vector<partida_guardada> listar();
+ };
+ 
+ #endif // GUARDADO_H
+diff --git a/juego.cpp b/juego.cpp
+index 4633053..2243dbd 100644
+--- a/juego.cpp
++++ b/juego.cpp
+@@ -164,8 +164,7 @@ void juego::repartir_cartas()
+ 
+ void juego::restaurar_cartas(const vector<carta> &cartas_player, const vector<carta> &cartas_ia)
+ {
+-    // Igual que en repartir_cartas: se anulan los punteros que apuntan dentro
+-    // de los vectores antes de reemplazarlos.
++    // Los punteros apuntan a las cartas viejas: se anulan antes de reemplazarlas
+     this->carta_player = nullptr;
+     this->carta_ia = nullptr;
+     this->player->setCarta_elegida(nullptr);
+diff --git a/juego.h b/juego.h
+index b81d1a8..9bf142d 100644
+--- a/juego.h
++++ b/juego.h
+@@ -27,8 +27,7 @@ public:
+     void set_ia(int dificultad);
+     int getDificultad() const;
+     void repartir_cartas();
+-    // Reemplaza las cartas actuales por las de una partida guardada.
+-    // Hay que haber llamado antes a set_ia().
++    // Reemplaza las cartas por las de una partida guardada (antes hay que llamar a set_ia)
+     void restaurar_cartas(const vector<carta> &cartas_player, const vector<carta> &cartas_ia);
+     void turnos();
+     carta *getcarta_player();
+diff --git a/mainwindow.cpp b/mainwindow.cpp
+index 728ecd8..5074ea2 100644
+--- a/mainwindow.cpp
++++ b/mainwindow.cpp
+@@ -2,9 +2,7 @@
+ #include "ui_mainwindow.h"
+ #include "dialogo_cargar.h"
+ #include "guardado.h"
+-#include <QDir>
+ #include <QMessageBox>
+-#include <QPushButton>
+ #include "configuracion.h"
+ #include "lectorconfiguracion.h"
+ #include <QCoreApplication>
+@@ -38,18 +36,6 @@ MainWindow::MainWindow(QWidget *parent)
+         ui->elegir_IA->setCurrentIndex(config.get_tipo_ia());
+     }
+ 
+-    // Botón "cargar_partida": se usa el del .ui si existe; si no, se crea uno
+-    // debajo del de iniciar partida, con el mismo estilo.
+-    QPushButton *boton_cargar = this->findChild<QPushButton *>("cargar_partida");
+-    if (!boton_cargar) {
+-        boton_cargar = new QPushButton("Cargar partida", ui->centralwidget);
+-        boton_cargar->setObjectName("cargar_partida");
+-        boton_cargar->setStyleSheet(ui->IniciaPartida->styleSheet());
+-        boton_cargar->setFont(ui->IniciaPartida->font());
+-        boton_cargar->setMinimumHeight(60);
+-        ui->gridLayout_2->addWidget(boton_cargar, 22, 1, 1, 7);
+-    }
+-    connect(boton_cargar, &QPushButton::clicked, this, &MainWindow::cargar_partida_guardada);
+ }
+ 
+ MainWindow::~MainWindow()
+@@ -83,32 +69,21 @@ void MainWindow::iniciar_partida()
+ 
+ 
+ 
+-void MainWindow::cargar_partida_guardada()
++void MainWindow::on_cargar_partida_clicked()
+ {
+-    int danadas = 0;
+-    const std::vector<partida_guardada> partidas = guardado::listar(&danadas);
++    vector<partida_guardada> partidas = guardado::listar();
+ 
+     if (partidas.empty()) {
+-        QString texto = "Todavía no hay partidas guardadas.\n\nCarpeta de partidas:\n" +
+-                        QDir::toNativeSeparators(guardado::carpeta());
+-        if (danadas > 0)
+-            texto += "\n\nNo se pudieron leer " + QString::number(danadas) +
+-                     " archivo(s) de esa carpeta (dañados o de otra versión).";
+-        QMessageBox::information(this, "Cargar partida", texto);
++        QMessageBox::information(this, "Cargar partida", "Todavía no hay partidas guardadas.");
+         return;
+     }
+ 
+-    dialogo_cargar dialogo(partidas, danadas, this);
+-    if (dialogo.exec() != QDialog::Accepted)
+-        return;
+-
+-    const int fila = dialogo.elegida();
+-    if (fila < 0 || fila >= static_cast<int>(partidas.size()))
+-        return;
+-
+-    this->accedePartida->cargar_partida(partidas[fila].datos);
+-    this->accedePartida->showMaximized();
+-    this->hide();
++    dialogo_cargar dialogo(partidas, this);
++    if (dialogo.exec() == QDialog::Accepted) {
++        this->accedePartida->cargar_partida(partidas[dialogo.elegida()]);
++        this->accedePartida->showMaximized();
++        this->hide();
++    }
+ }
+ 
+ 
+diff --git a/mainwindow.h b/mainwindow.h
+index 4c80bf5..bbb763d 100644
+--- a/mainwindow.h
++++ b/mainwindow.h
+@@ -35,8 +35,7 @@ private slots:
+ 
+     void on_reglas_clicked();
+ 
+-    // Botón "cargar_partida": deja elegir una partida guardada y la reanuda
+-    void cargar_partida_guardada();
++    void on_cargar_partida_clicked();
+ 
+ private:
+     Ui::MainWindow *ui;
+diff --git a/partida.cpp b/partida.cpp
+index 895cf3f..c88f731 100644
+--- a/partida.cpp
++++ b/partida.cpp
+@@ -473,18 +473,16 @@ void partida::cargar_iconos_cartas()
+ }
+ 
+ 
+-void partida::cargar_partida(const datos_partida &datos)
++void partida::cargar_partida(const partida_guardada &guardada)
+ {
+-    // La IA tiene que existir antes de restaurar las cartas
+-    setDificultad_ia(datos.dificultad_ia);
+-    setCant_cartas(static_cast<int>(datos.cartas_player.size()));
+-    setNombre(QString::fromStdString(datos.nombre));
+-    juego.setCant_cartas(cant_cartas);
++    setDificultad_ia(guardada.dificultad);      // primero la IA, porque las cartas se le asignan después
++    setCant_cartas(guardada.cartas_player.size());
++    setNombre(guardada.nombre);
+ 
+     crearBotonesCartas();
+     crearCartasIA();
+ 
+-    juego.restaurar_cartas(datos.cartas_player, datos.cartas_ia);
++    juego.restaurar_cartas(guardada.cartas_player, guardada.cartas_ia);
+     juego.tabla_danio_ia();
+ 
+     cargar_iconos_cartas();
+@@ -492,7 +490,7 @@ void partida::cargar_partida(const datos_partida &datos)
+ 
+     actualizar_vida();
+     actualizarVidaIA();
+-    habilitar_vivas();   // las cartas eliminadas quedan deshabilitadas
++    habilitar_vivas();      // las cartas sin vida quedan deshabilitadas
+ }
+ 
+ void partida::aplicar_configuracion(const Configuracion &config)
+@@ -559,21 +557,16 @@ void partida::on_tabla_danio_clicked()
+ 
+ void partida::on_guardar_partida_clicked()
+ {
+-    // Se toma una "foto" de la partida tal como está en este momento
+-    datos_partida datos;
+-    datos.nombre = this->nombre.trimmed().toStdString();
+-    datos.dificultad_ia = this->juego.getDificultad();
+-    datos.cartas_player = *this->juego.getcartas_player();
+-    datos.cartas_ia = *this->juego.getcartas_ia();
+-
+-    QString ruta;
+-    QString error;
+-    if (guardado::guardar(datos, &ruta, &error)) {
+-        QMessageBox::information(this, "Partida guardada",
+-                                 "La partida se guardó en:\n" + ruta);
+-    } else {
+-        QMessageBox::warning(this, "No se pudo guardar", error);
+-    }
++    partida_guardada guardada;
++    guardada.nombre = this->nombre.trimmed();
++    guardada.dificultad = this->juego.getDificultad();
++    guardada.cartas_player = *this->juego.getcartas_player();
++    guardada.cartas_ia = *this->juego.getcartas_ia();
++
++    if (guardado::guardar(guardada))
++        QMessageBox::information(this, "Partida guardada", "La partida se guardó correctamente.");
++    else
++        QMessageBox::warning(this, "Error", "No se pudo guardar la partida.");
+ }
+ 
+ void partida::setNombre(const QString &newNombre)
+diff --git a/partida.h b/partida.h
+index 2761656..bf683f9 100644
+--- a/partida.h
++++ b/partida.h
+@@ -1,7 +1,7 @@
+ #ifndef PARTIDA_H
+ #define PARTIDA_H
+ #include "juego.h"
+-#include "formato_partida.h"
++#include "guardado.h"
+ #include <QMainWindow>
+ #include <QSoundEffect>
+ #include "qprogressbar.h"
+@@ -54,8 +54,8 @@ public:
+ 
+     void setNombre(const QString &newNombre);
+ 
+-    // Reanuda una partida guardada (nombre, IA, cartas y vidas).
+-    void cargar_partida(const datos_partida &datos);
++    // Continúa una partida guardada
++    void cargar_partida(const partida_guardada &guardada);
+ 
+     void aplicar_configuracion(const Configuracion& config);
+ 
+diff --git a/tp_poo.pro b/tp_poo.pro
+index adcc187..40419d3 100644
+--- a/tp_poo.pro
++++ b/tp_poo.pro
+@@ -8,7 +8,6 @@ SOURCES += \
+         carta.cpp \
+         configuracion.cpp \
+         dialogo_cargar.cpp \
+-        formato_partida.cpp \
+         guardado.cpp \
+         ia.cpp \
+         ia_aleatoria.cpp \
+@@ -28,7 +27,6 @@ HEADERS += \
+     carta.h \
+     configuracion.h \
+     dialogo_cargar.h \
+-    formato_partida.h \
+     guardado.h \
+     ia.h \
+     ia_aleatoria.h \
