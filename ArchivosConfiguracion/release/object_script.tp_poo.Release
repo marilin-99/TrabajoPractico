@@ -1,7 +1,6 @@
 release/carta.o
 release/configuracion.o
 release/dialogo_cargar.o
-release/formato_partida.o
 release/guardado.o
 release/ia.o
 release/ia_aleatoria.o

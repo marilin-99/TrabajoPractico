@@ -53,7 +53,6 @@ OBJECTS_DIR   = release
 SOURCES       = ..\carta.cpp \
 		..\configuracion.cpp \
 		..\dialogo_cargar.cpp \
-		..\formato_partida.cpp \
 		..\guardado.cpp \
 		..\ia.cpp \
 		..\ia_aleatoria.cpp \
@@ -75,7 +74,6 @@ SOURCES       = ..\carta.cpp \
 OBJECTS       = release/carta.o \
 		release/configuracion.o \
 		release/dialogo_cargar.o \
-		release/formato_partida.o \
 		release/guardado.o \
 		release/ia.o \
 		release/ia_aleatoria.o \
@@ -99,7 +97,6 @@ OBJECTS       = release/carta.o \
 DIST          =  ..\carta.h \
 		..\configuracion.h \
 		..\dialogo_cargar.h \
-		..\formato_partida.h \
 		..\guardado.h \
 		..\ia.h \
 		..\ia_aleatoria.h \
@@ -115,7 +112,6 @@ DIST          =  ..\carta.h \
 		..\tabla_danio_ventana.h ..\carta.cpp \
 		..\configuracion.cpp \
 		..\dialogo_cargar.cpp \
-		..\formato_partida.cpp \
 		..\guardado.cpp \
 		..\ia.cpp \
 		..\ia_aleatoria.cpp \
@@ -149,10 +145,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) tp_poo.zip $(SOURCES) $(DIST) ..\..\tp_poo.pro C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\spec_pre.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\device_config.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\sanitize.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\gcc-base.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\g++-base.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\windows-vulkan.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\g++-win32.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\windows-desktop.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\qconfig.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_openxr_loader.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_charts.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_charts_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_core.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_ffmpegmediapluginimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_help.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsplatform.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsplatform_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekit.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekit_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekitimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekitimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssynchronizer.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssynchronizer_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimedia.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediatestlibprivate_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_network.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlassetdownloader_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlformat_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmeta.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmeta_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3d.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dxr.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dxr_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fluentwinui3styleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickeffects.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickshapes.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickshapesdesignhelpers_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimage.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimage_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimagegenerator_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimagehelpers.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimagehelpers_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_shadertools.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_tasktree.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_tasktree_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_testinternals_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qt_functions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qt_config.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\win32-g++\qmake.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\exclusive_builds.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\toolchain.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\default_pre.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\default_pre.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\resolve_config.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\default_post.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\build_pass.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\console.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qml_debug.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\precompile_header.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\warn_on.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\permissions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qt.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\resources_functions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\resources.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\moc.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\opengl.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\uic.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qmake_use.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\file_copies.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\testcase_targets.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\exceptions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\yacc.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\lex.prf ..\tp_poo.pro ..\recursos.qrc C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Widgets.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Multimedia.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Gui.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Network.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Core.prl   ..\recursos.qrc C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\data\dummy.cpp ..\carta.h ..\configuracion.h ..\dialogo_cargar.h ..\formato_partida.h ..\guardado.h ..\ia.h ..\ia_aleatoria.h ..\ia_estrategica.h ..\ia_super.h ..\juego.h ..\jugador.h ..\lectorconfiguracion.h ..\mainwindow.h ..\partida.h ..\persona.h ..\reglas.h ..\tabla_danio_ventana.h  ..\carta.cpp ..\configuracion.cpp ..\dialogo_cargar.cpp ..\formato_partida.cpp ..\guardado.cpp ..\ia.cpp ..\ia_aleatoria.cpp ..\ia_estrategica.cpp ..\ia_super.cpp ..\juego.cpp ..\jugador.cpp ..\lectorconfiguracion.cpp ..\main.cpp ..\mainwindow.cpp ..\partida.cpp ..\persona.cpp ..\reglas.cpp ..\tabla_danio_ventana.cpp ..\mainwindow.ui ..\partida.ui ..\reglas.ui ..\tabla_danio_ventana.ui    
+	$(ZIP) tp_poo.zip $(SOURCES) $(DIST) ..\tp_poo.pro C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\spec_pre.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\device_config.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\sanitize.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\gcc-base.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\g++-base.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\windows-vulkan.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\g++-win32.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\common\windows-desktop.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\qconfig.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_ext_openxr_loader.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_charts.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_charts_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_core.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_ffmpegmediapluginimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_help.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsplatform.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsplatform_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekit.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekit_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekitimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labsstylekitimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssynchronizer.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labssynchronizer_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimedia.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediatestlibprivate_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_network.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlassetdownloader_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlformat_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmeta.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmeta_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3d.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dxr.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick3dxr_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fluentwinui3styleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickeffects.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickshapes.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickshapesdesignhelpers_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimage.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimage_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimagegenerator_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimagehelpers.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickvectorimagehelpers_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_shadertools.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_tasktree.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_tasktree_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_testinternals_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qt_functions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qt_config.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\win32-g++\qmake.conf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\exclusive_builds.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\toolchain.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\default_pre.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\default_pre.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\resolve_config.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\default_post.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\build_pass.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\console.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qml_debug.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\precompile_header.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\warn_on.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\permissions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qt.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\resources_functions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\resources.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\moc.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\win32\opengl.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\uic.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\qmake_use.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\file_copies.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\testcase_targets.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\exceptions.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\yacc.prf C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\lex.prf ..\tp_poo.pro ..\recursos.qrc C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Widgets.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Multimedia.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Gui.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Network.prl C:\qtnuevo\6.11.0\mingw_64\lib\Qt6Core.prl   ..\recursos.qrc C:\qtnuevo\6.11.0\mingw_64\mkspecs\features\data\dummy.cpp ..\carta.h ..\configuracion.h ..\dialogo_cargar.h ..\guardado.h ..\ia.h ..\ia_aleatoria.h ..\ia_estrategica.h ..\ia_super.h ..\juego.h ..\jugador.h ..\lectorconfiguracion.h ..\mainwindow.h ..\partida.h ..\persona.h ..\reglas.h ..\tabla_danio_ventana.h  ..\carta.cpp ..\configuracion.cpp ..\dialogo_cargar.cpp ..\guardado.cpp ..\ia.cpp ..\ia_aleatoria.cpp ..\ia_estrategica.cpp ..\ia_super.cpp ..\juego.cpp ..\jugador.cpp ..\lectorconfiguracion.cpp ..\main.cpp ..\mainwindow.cpp ..\partida.cpp ..\persona.cpp ..\reglas.cpp ..\tabla_danio_ventana.cpp ..\mainwindow.ui ..\partida.ui ..\reglas.ui ..\tabla_danio_ventana.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\carta.o release\configuracion.o release\dialogo_cargar.o release\formato_partida.o release\guardado.o release\ia.o release\ia_aleatoria.o release\ia_estrategica.o release\ia_super.o release\juego.o release\jugador.o release\lectorconfiguracion.o release\main.o release\mainwindow.o release\partida.o release\persona.o release\reglas.o release\tabla_danio_ventana.o release\qrc_recursos.o release\moc_mainwindow.o release\moc_partida.o release\moc_reglas.o release\moc_tabla_danio_ventana.o
+	-$(DEL_FILE) release\carta.o release\configuracion.o release\dialogo_cargar.o release\guardado.o release\ia.o release\ia_aleatoria.o release\ia_estrategica.o release\ia_super.o release\juego.o release\jugador.o release\lectorconfiguracion.o release\main.o release\mainwindow.o release\partida.o release\persona.o release\reglas.o release\tabla_danio_ventana.o release\qrc_recursos.o release\moc_mainwindow.o release\moc_partida.o release\moc_reglas.o release\moc_tabla_danio_ventana.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -406,7 +402,9 @@ release/moc_mainwindow.cpp: ../mainwindow.h \
 		../partida.h \
 		../juego.h \
 		../persona.h \
-		../formato_partida.h \
+		../configuracion.h \
+		../guardado.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/QSoundEffect \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/qsoundeffect.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -445,11 +443,11 @@ release/moc_partida.cpp: ../partida.h \
 		../carta.h \
 		../ia.h \
 		../persona.h \
-		../formato_partida.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QMainWindow \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qmainwindow.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../configuracion.h \
+		../guardado.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstring.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qchar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qglobal.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtcoreglobal.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtversionchecks.h \
@@ -497,27 +495,14 @@ release/moc_partida.cpp: ../partida.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtresource.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qttranslation.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qversiontagging.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtgui-config.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiexports.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qwidget.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qnamespace.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcompare.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstdlibdetection.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcomparehelpers.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtmetamacros.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobject.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstring.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qchar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringview.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qbytearray.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qrefcount.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qnamespace.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtmetamacros.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qarraydata.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qpair.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qarraydatapointer.h \
@@ -539,6 +524,21 @@ release/moc_partida.cpp: ../partida.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringconverter.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QMainWindow \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiglobal.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtgui-config.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiexports.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qwidget.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobject.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qlist.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qiterator.h \
@@ -1091,6 +1091,7 @@ release/moc_tabla_danio_ventana.cpp: ../tabla_danio_ventana.h \
 		../carta.h \
 		../ia.h \
 		../persona.h \
+		../configuracion.h \
 		release/moc_predefs.h \
 		C:/qtnuevo/6.11.0/mingw_64/bin/moc.exe
 	C:\qtnuevo\6.11.0\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Marilin/Desktop/TP.POO/TrabajoPractico/ArchivosConfiguracion/release/moc_predefs.h -IC:/qtnuevo/6.11.0/mingw_64/mkspecs/win32-g++ -IC:/Users/Marilin/Desktop/TP.POO/TrabajoPractico -IC:/qtnuevo/6.11.0/mingw_64/include -IC:/qtnuevo/6.11.0/mingw_64/include/QtWidgets -IC:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia -IC:/qtnuevo/6.11.0/mingw_64/include/QtGui -IC:/qtnuevo/6.11.0/mingw_64/include/QtNetwork -IC:/qtnuevo/6.11.0/mingw_64/include/QtCore -I. -IC:/qtnuevo/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/qtnuevo/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/qtnuevo/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/qtnuevo/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/qtnuevo/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/qtnuevo/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\tabla_danio_ventana.h -o release\moc_tabla_danio_ventana.cpp
@@ -1357,32 +1358,24 @@ release/dialogo_cargar.o: ../dialogo_cargar.cpp ../dialogo_cargar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QPushButton \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../guardado.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
-		../formato_partida.h \
 		../carta.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QDateTime \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcalendar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QDialogButtonBox \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QLabel \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlabel.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qpicture.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextdocument.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QPushButton \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractbutton.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlayout.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qgridlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dialogo_cargar.o ..\dialogo_cargar.cpp
-
-release/formato_partida.o: ../formato_partida.cpp ../formato_partida.h \
-		../carta.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formato_partida.o ..\formato_partida.cpp
 
 release/guardado.o: ../guardado.cpp ../guardado.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
@@ -1464,7 +1457,6 @@ release/guardado.o: ../guardado.cpp ../guardado.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringconverter.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringconverter_base.h \
-		../formato_partida.h \
 		../carta.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QCoreApplication \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcoreapplication.h \
@@ -1528,6 +1520,7 @@ release/guardado.o: ../guardado.cpp ../guardado.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qalloc.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/q23utility.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/q20utility.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QDataStream \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QDir \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qdir.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qdirlisting.h \
@@ -1541,10 +1534,7 @@ release/guardado.o: ../guardado.cpp ../guardado.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfile.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfileinfo.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtimezone.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QFile \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QFileInfo \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QSaveFile \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qsavefile.h
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QFile
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\guardado.o ..\guardado.cpp
 
 release/ia.o: ../ia.cpp ../ia.h \
@@ -1805,6 +1795,7 @@ release/juego.o: ../juego.cpp ../juego.h \
 		../carta.h \
 		../ia.h \
 		../persona.h \
+		../configuracion.h \
 		../ia_aleatoria.h \
 		../ia_estrategica.h \
 		../ia_super.h \
@@ -1929,7 +1920,8 @@ release/jugador.o: ../jugador.cpp ../jugador.h \
 		../carta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\jugador.o ..\jugador.cpp
 
-release/lectorconfiguracion.o: ../lectorconfiguracion.cpp ../lectorconfiguracion.h
+release/lectorconfiguracion.o: ../lectorconfiguracion.cpp ../lectorconfiguracion.h \
+		../configuracion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\lectorconfiguracion.o ..\lectorconfiguracion.cpp
 
 release/main.o: ../main.cpp ../mainwindow.h \
@@ -2141,7 +2133,9 @@ release/main.o: ../main.cpp ../mainwindow.h \
 		../partida.h \
 		../juego.h \
 		../persona.h \
-		../formato_partida.h \
+		../configuracion.h \
+		../guardado.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/QSoundEffect \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/qsoundeffect.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -2383,7 +2377,9 @@ release/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../partida.h \
 		../juego.h \
 		../persona.h \
-		../formato_partida.h \
+		../configuracion.h \
+		../guardado.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/QSoundEffect \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/qsoundeffect.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -2413,11 +2409,16 @@ release/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../ia_super.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/Qstring \
 		ui_mainwindow.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QVariant \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QApplication \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qapplication.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QComboBox \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qcombobox.h \
+		../dialogo_cargar.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QDialog \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialog.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QListWidget \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlistwidget.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlistview.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qitemselectionmodel.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstyleoption.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
@@ -2428,40 +2429,14 @@ release/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstyle.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qabstractitemmodel.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QSpinBox \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qspinbox.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QTextEdit \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtextedit.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextcursor.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextformat.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qpen.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QWidget \
-		../dialogo_cargar.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QDialog \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialog.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QListWidget \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlistwidget.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlistview.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qitemselectionmodel.h \
-		../guardado.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QDir \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qdir.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qdirlisting.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfile.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfileinfo.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtimezone.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		../lectorconfiguracion.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QCoreApplication \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QDebug \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QStatusBar \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstatusbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\mainwindow.cpp
 
 release/partida.o: ../partida.cpp ../partida.h \
@@ -2470,11 +2445,11 @@ release/partida.o: ../partida.cpp ../partida.h \
 		../carta.h \
 		../ia.h \
 		../persona.h \
-		../formato_partida.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QMainWindow \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qmainwindow.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../configuracion.h \
+		../guardado.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstring.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qchar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qglobal.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtcoreglobal.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtversionchecks.h \
@@ -2522,27 +2497,14 @@ release/partida.o: ../partida.cpp ../partida.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtresource.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qttranslation.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qversiontagging.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtgui-config.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiexports.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qwidget.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qnamespace.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcompare.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstdlibdetection.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qcomparehelpers.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtmetamacros.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobject.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstring.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qchar.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringview.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qbytearray.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qrefcount.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qnamespace.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qtmetamacros.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qarraydata.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qpair.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qarraydatapointer.h \
@@ -2564,6 +2526,21 @@ release/partida.o: ../partida.cpp ../partida.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringconverter.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QMainWindow \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiglobal.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtgui-config.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtguiexports.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qwidget.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qobject.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qlist.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qiterator.h \
@@ -2698,16 +2675,12 @@ release/partida.o: ../partida.cpp ../partida.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qpicture.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextdocument.h \
 		ui_partida.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QVariant \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QApplication \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qapplication.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QWidget \
-		../guardado.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QString \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialog.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QApplication \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qapplication.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QSpacerItem \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QSizePolicy \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QPropertyAnimation \
@@ -2928,20 +2901,11 @@ release/reglas.o: ../reglas.cpp ../reglas.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtabwidget.h \
 		ui_reglas.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QVariant \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QApplication \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qapplication.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlayout.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qgridlayout.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QLabel \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlabel.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qframe.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qpicture.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextdocument.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QWidget
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextdocument.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\reglas.o ..\reglas.cpp
 
 release/tabla_danio_ventana.o: ../tabla_danio_ventana.cpp ../tabla_danio_ventana.h \
@@ -3152,36 +3116,8 @@ release/tabla_danio_ventana.o: ../tabla_danio_ventana.cpp ../tabla_danio_ventana
 		../carta.h \
 		../ia.h \
 		../persona.h \
-		ui_tabla_danio_ventana.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QVariant \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QApplication \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qapplication.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlayout.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QHeaderView \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qheaderview.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qframe.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qabstractitemmodel.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qitemselectionmodel.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstyleoption.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qvalidator.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qslider.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qabstractslider.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstyle.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtabbar.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QTableWidget \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtablewidget.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qtableview.h \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QWidget
+		../configuracion.h \
+		ui_tabla_danio_ventana.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\tabla_danio_ventana.o ..\tabla_danio_ventana.cpp
 
 release/qrc_recursos.o: release/qrc_recursos.cpp 

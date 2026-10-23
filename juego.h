@@ -5,7 +5,7 @@
 #include "carta.h"
 #include "ia.h"
 #include "persona.h"
-#include <configuracion.h>
+#include "configuracion.h"
 
 using namespace std;
 
