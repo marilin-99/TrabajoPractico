@@ -18,7 +18,7 @@ public:
     void set_danio(size_t fila, size_t columna, int valor);
 private:
     int cant_elementos;
-    int ia_elegida;
+    int ia_elegida=0;
     Matriz tabla_danio;
 
 };

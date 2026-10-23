@@ -7,11 +7,11 @@
 #include "lectorconfiguracion.h"
 #include <QCoreApplication>
 #include <QDebug>
-<<<<<<< Updated upstream
+
 #include <QStatusBar>
-=======
+
 #include <QLineEdit>
->>>>>>> Stashed changes
+
 
 using namespace std;
 MainWindow::MainWindow(QWidget *parent)

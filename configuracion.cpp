@@ -23,7 +23,8 @@ int Configuracion::get_cantidad() const
 void Configuracion::tipo_ia(int ia)
 {
     if((ia < 1 ) || (ia > 3)){
-        throw;
+        throw invalid_argument("tipo_ia debe estar entre 1 y 3");
+
     }
     this->ia_elegida = ia;
 }
@@ -46,10 +47,10 @@ const Configuracion::Matriz &Configuracion::get_tabla() const
 void Configuracion::set_danio(size_t fila, size_t columna, int valor)
 {
     if(fila >= this->tabla_danio.size() || columna >= this->tabla_danio[fila].size()){
-        throw;
+        throw out_of_range("indice fuera de la tabla de danio");
     }
     if(valor < 0){
-        throw;
+        throw invalid_argument("el danio no puede ser negativo");
     }
     this->tabla_danio[fila][columna] = valor;
 }
