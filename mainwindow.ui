@@ -334,39 +334,66 @@ border: 3px solid #555555;
        <widget class="QSpinBox" name="cantidad_cartas">
         <property name="styleSheet">
          <string notr="true">QSpinBox {
-
     background-color: #fbd9a0;
-
     color: black;
-
     border: 2px solid #7a4a00;
-
     border-radius: 10px;
-
-    padding: 4px 8px;
-
+    padding: 4px 28px 4px 8px;
     font-size: 13px;
-
-    min-width: 220px;
-
-    max-width: 220px;
-
+    /* Mantenemos el mismo ancho armónico de 180px */
+    min-width: 180px;
+    max-width: 180px;
     min-height: 40px;
-
     max-height: 40px;
-
 }
 
-
-
 QSpinBox:focus {
-
     border: 2px solid #c62828;
-
     background-color: #ffe5b8;
-
     outline: 0;
+}
 
+/* Botones de arriba y abajo del QSpinBox en tono crema cálido */
+QSpinBox::up-button, QSpinBox::down-button {
+    subcontrol-origin: padding;
+    width: 18px;
+    background-color: #fce8c7;
+    border: 1px solid #b88642;
+}
+
+QSpinBox::up-button {
+    subcontrol-position: top right;
+    border-top-right-radius: 8px;
+    border-bottom: none;
+}
+
+QSpinBox::down-button {
+    subcontrol-position: bottom right;
+    border-bottom-right-radius: 8px;
+    border-top: none;
+}
+
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background-color: #e6c594;
+}
+
+/* Flechitas internas de los botones */
+QSpinBox::up-arrow {
+    image: none;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 4px solid #7a4a00;
+    width: 0px;
+    height: 0px;
+}
+
+QSpinBox::down-arrow {
+    image: none;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 4px solid #7a4a00;
+    width: 0px;
+    height: 0px;
 }</string>
         </property>
         <property name="minimum">
