@@ -7,7 +7,11 @@
 #include "lectorconfiguracion.h"
 #include <QCoreApplication>
 #include <QDebug>
+<<<<<<< Updated upstream
 #include <QStatusBar>
+=======
+#include <QLineEdit>
+>>>>>>> Stashed changes
 
 using namespace std;
 MainWindow::MainWindow(QWidget *parent)
@@ -15,6 +19,19 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->caja_nombre->setPlaceholderText("Ingrese nombre");
+    QString nombre = ui->caja_nombre->toPlainText();
+    ui->cantidad_cartas->setMinimum(0);
+    ui->cantidad_cartas->setValue(0);
+    ui->cantidad_cartas->setSpecialValueText("Ingrese cantidad de cartas");
+    ui->cantidad_cartas->findChild<QLineEdit*>()->setReadOnly(true);
+
+    ui->verticalSpacer_7->changeSize(20, 150, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalSpacer_5->changeSize(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalSpacer_3->changeSize(20, 30, QSizePolicy::Minimum, QSizePolicy::Fixed);
+    ui->verticalSpacer_2->changeSize(20, 30, QSizePolicy::Minimum, QSizePolicy::Fixed);
+    ui->gridLayout_2->invalidate();
+
     showMaximized();
     this->accedePartida = new partida(this);
     ui->IniciaPartida->setEnabled(0);

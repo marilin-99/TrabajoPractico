@@ -30,149 +30,26 @@
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="3" column="2" rowspan="3" colspan="5">
-       <widget class="QComboBox" name="elegir_IA">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>700</width>
-          <height>500</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>Seleccionar IA</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>IA Aleatoria</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>IA Estrategica</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>IA Super</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="19" column="1" colspan="7">
-       <widget class="QPushButton" name="IniciaPartida">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>1000</width>
-          <height>1000</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #b91c1c,
-        stop:1 #3f0000
-    );
-
-    color: #fff7ed;
-
-    border: 3px solid #f59e0b;
-    border-radius: 18px;
-
-    font-size: 20px;
-    font-weight: bold;
-
-    padding: 12px;
-
-}
-
-
-/* Cuando pasas el mouse */
-QPushButton:hover {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #ef4444,
-        stop:1 #7f1d1d
-    );
-
-    border: 3px solid #fde68a;
-
-    color: white;
-}
-
-
-/* Cuando haces click */
-QPushButton:pressed {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #450a0a,
-        stop:1 #1f0000
-    );
-
-    border: 3px solid #ffffff;
-
-    padding-top: 15px;
-}
-
-
-/* Botón bloqueado */
-QPushButton:disabled {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #3a3a3a,
-        stop:1 #111111
-    );
-
-    color: #777777;
-
-    border: 3px solid #555555;
-
-}
-</string>
-        </property>
-        <property name="text">
-         <string>Iniciar Partida</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="1" rowspan="9" colspan="7">
+      <item row="11" column="1" rowspan="9" colspan="7">
        <spacer name="verticalSpacer_3">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Policy::Minimum</enum>
+         <enum>QSizePolicy::Policy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>30</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="1" rowspan="4" colspan="7">
+       <spacer name="verticalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -182,102 +59,51 @@ QPushButton:disabled {
         </property>
        </spacer>
       </item>
-      <item row="23" column="5" colspan="3">
-       <widget class="QPushButton" name="reglas">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>700</width>
-          <height>500</height>
-         </size>
-        </property>
+      <item row="6" column="4">
+       <widget class="QSpinBox" name="cantidad_cartas">
         <property name="styleSheet">
-         <string notr="true">QPushButton {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #92400e,
-        stop:1 #3b1605
-    );
-
-    color: #fff7ed;
-
-    border: 3px solid #fbbf24;
-    border-radius: 18px;
-
-    font-size: 20px;
-    font-weight: bold;
-
-    padding: 12px;
+         <string notr="true">QSpinBox {
+background-color: #fbd9a0;
+color: black;
+border: 2px solid #7a4a00;
+border-radius: 10px;
+padding: 6px 8px;
+font-size: 13px;
+min-width: 200px;
+min-height: 40px;
+max-height: 40px;
+selection-background-color: transparent;
+selection-color: black;
 }
-
-
-/* Hover */
-QPushButton:hover {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #b45309,
-        stop:1 #78350f
-    );
-
-    border: 3px solid #fde68a;
-
-    color: white;
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: top right;
+width: 24px;
+background: transparent;
+border: none;
 }
-
-
-/* Click */
-QPushButton:pressed {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #451a03,
-        stop:1 #1c0a02
-    );
-
-    border: 3px solid white;
-
-    padding-top: 15px;
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: bottom right;
+width: 24px;
+background: transparent;
+border: none;
 }
-
-
-/* Deshabilitado */
-QPushButton:disabled {
-
-    background: qlineargradient(
-        x1:0, y1:0,
-        x2:0, y2:1,
-        stop:0 #4b4038,
-        stop:1 #211b18
-    );
-
-    color: #8b8178;
-
-    border: 3px solid #665b52;
+QSpinBox::up-arrow {
+width: 0px;
+height: 0px;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-bottom: 6px solid #3b1d00;
+}
+QSpinBox::down-arrow {
+width: 0px;
+height: 0px;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-top: 6px solid #3b1d00;
 }</string>
         </property>
-        <property name="text">
-         <string>reglas</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="21" column="1">
-       <widget class="QSpinBox" name="cantidad_cartas">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -289,7 +115,20 @@ QPushButton:disabled {
         </property>
        </widget>
       </item>
-      <item row="23" column="1" colspan="3">
+      <item row="1" column="0" rowspan="28">
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="25" column="1" colspan="3">
        <widget class="QPushButton" name="tabla_danio_boton">
         <property name="minimumSize">
          <size>
@@ -373,37 +212,11 @@ QPushButton:disabled {
 }</string>
         </property>
         <property name="text">
-         <string>tabla de daño</string>
+         <string>Tabla de daño</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0" rowspan="25">
-       <spacer name="horizontalSpacer_7">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="1" colspan="7">
-       <spacer name="verticalSpacer_7">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="8" rowspan="25">
+      <item row="1" column="8" rowspan="28">
        <spacer name="horizontalSpacer_9">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
@@ -417,32 +230,342 @@ QPushButton:disabled {
        </spacer>
       </item>
       <item row="20" column="1" colspan="7">
+       <widget class="QPushButton" name="IniciaPartida">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+
+
+
+background: qlineargradient(
+
+x1:0, y1:0,
+
+x2:0, y2:1,
+
+stop:0 #b91c1c,
+
+stop:1 #3f0000
+
+);
+
+
+
+color: #fff7ed;
+
+
+
+border: 3px solid #f59e0b;
+
+border-radius: 18px;
+
+
+
+font-size: 20px;
+
+font-weight: bold;
+
+
+
+padding: 12px;
+
+
+
+}
+
+
+
+
+
+/* Cuando pasas el mouse */
+
+QPushButton:hover {
+
+
+
+background: qlineargradient(
+
+x1:0, y1:0,
+
+x2:0, y2:1,
+
+stop:0 #ef4444,
+
+stop:1 #7f1d1d
+
+);
+
+
+
+border: 3px solid #fde68a;
+
+
+
+color: white;
+
+}
+
+
+
+
+
+/* Cuando haces click */
+
+QPushButton:pressed {
+
+
+
+background: qlineargradient(
+
+x1:0, y1:0,
+
+x2:0, y2:1,
+
+stop:0 #450a0a,
+
+stop:1 #1f0000
+
+);
+
+
+
+border: 3px solid #ffffff;
+
+
+
+padding-top: 15px;
+
+}
+
+
+
+
+
+/* Botón bloqueado */
+
+QPushButton:disabled {
+
+
+
+background: qlineargradient(
+
+x1:0, y1:0,
+
+x2:0, y2:1,
+
+stop:0 #3a3a3a,
+
+stop:1 #111111
+
+);
+
+
+
+color: #777777;
+
+
+
+border: 3px solid #555555;
+
+
+
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Iniciar Partida</string>
+        </property>
+       </widget>
+      </item>
+      <item row="25" column="5" colspan="3">
+       <widget class="QPushButton" name="reglas">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>250</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #b45309,
+        stop:1 #78350f
+    );
+
+    color: #fff7ed;
+
+    /* Borde dorado/ámbar cálido para resaltar sobre el marrón */
+    border: 3px solid #f59e0b;
+    border-radius: 18px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 12px;
+    min-width: 220px;
+    max-width: 220px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+/* Hover (Al pasar el mouse) */
+QPushButton:hover {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #d97706,
+        stop:1 #92400e
+    );
+
+    /* Borde más brillante al pasar el cursor */
+    border: 3px solid #fbbf24;
+    color: white;
+}
+
+/* Click (Al presionar) */
+QPushButton:pressed {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #451a03,
+        stop:1 #1c0a02
+    );
+
+    border: 3px solid #d97706;
+    padding-top: 15px;
+}
+
+/* Deshabilitado */
+QPushButton:disabled {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #4b4038,
+        stop:1 #211b18
+    );
+
+    color: #8b8178;
+    border: 3px solid #665b52;
+}</string>
+        </property>
+        <property name="text">
+         <string>Reglas</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QTextEdit" name="caja_nombre">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>244</width>
+          <height>53</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>244</width>
+          <height>53</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTextEdit#caja_nombre {
+    background-color: #fbd9a0;
+    color: #000000;
+    border: 2px solid #7a4a00;
+    border-radius: 10px;
+    
+    /* Forzamos negrita intensa y un pequeño truco de grosor extra si el sistema lo soporta */
+    font-weight: 800;
+    font-size: 13px;
+    
+    /* Padding milimétrico para que la 'g' no toque los bordes con este grosor */
+    padding: 5px 10px 4px 10px;
+    
+    /* Mantenemos estrictamente los 40px */
+    min-width: 220px;
+    max-width: 220px;
+    min-height: 40px;
+    max-height: 40px;
+}
+
+QTextEdit#caja_nombre:focus {
+    border: 2px solid #c62828;
+    background-color: #ffe5b8;
+    outline: 0;
+}</string>
+        </property>
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:13px; font-weight:800; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese nombre</string>
+        </property>
+       </widget>
+      </item>
+      <item row="21" column="1" colspan="7">
        <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
         </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Fixed</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>40</height>
+          <height>30</height>
          </size>
         </property>
        </spacer>
       </item>
-      <item row="23" column="4">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="24" column="1" colspan="7">
+      <item row="28" column="1" colspan="7">
        <spacer name="verticalSpacer_5">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
@@ -455,13 +578,166 @@ QPushButton:disabled {
         </property>
        </spacer>
       </item>
-      <item row="5" column="1">
-       <widget class="QTextEdit" name="caja_nombre"/>
+      <item row="6" column="5">
+       <widget class="QComboBox" name="elegir_IA">
+        <property name="minimumSize">
+         <size>
+          <width>240</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>240</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+    background-color: #fbd9a0;
+    color: black;
+    border: 2px solid #7a4a00;
+    border-radius: 10px;
+    padding: 6px 8px;
+    font-size: 13px;
+    
+    /* Ajusta aquí el ancho deseado (cámbialo a 200px, 220px, etc. según prefieras) */
+    min-width: 220px;
+    max-width: 220px;
+    
+    min-height: 40px;
+    max-height: 40px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: center right;
+    width: 28px;
+    border: none;
+}
+
+QComboBox::down-arrow {
+    width: 0px;
+    height: 0px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #3b1d00;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #fbd9a0;
+    color: black;
+    border: 2px solid #7a4a00;
+    selection-background-color: #e0a64d;
+    selection-color: black;
+    outline: 0;
+}
+QComboBox::drop-down {
+subcontrol-origin: padding;
+subcontrol-position: center right;
+width: 28px;
+border: none;
+}
+QComboBox::down-arrow {
+width: 0px;
+height: 0px;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-top: 6px solid #3b1d00;
+}
+QComboBox QAbstractItemView {
+background-color: #fbd9a0;
+color: black;
+border: 2px solid #7a4a00;
+selection-background-color: #e0a64d;
+selection-color: black;
+outline: 0;
+}</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Seleccionar IA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>IA Aleatoria</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>IA Estrategica</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>IA Super</string>
+         </property>
+        </item>
+       </widget>
       </item>
-      <item row="5" column="7">
+      <item row="27" column="4">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="25" column="4">
        <widget class="QPushButton" name="cargar_partida">
+        <property name="styleSheet">
+         <string notr="true">
+
+
+QPushButton#cargar_partida {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #10b981,
+        stop:1 #065f46
+    );
+
+    color: white;
+
+    /* Borde verde principal (más claro para destacar) */
+    border: 3px solid #34d399;
+    border-radius: 18px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 12px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+QPushButton#cargar_partida:hover {
+    background: qlineargradient(
+        x1:0, y1:0,
+        x2:0, y2:1,
+        stop:0 #34d399,
+        stop:1 #047857
+    );
+
+    /* Borde verde más brillante al pasar el mouse */
+    border: 3px solid #6ee7b7;
+}
+
+QPushButton#cargar_partida:pressed {
+    background: #064e3b;
+    
+    /* Borde verde suave al presionar */
+    border: 3px solid #059669;
+}</string>
+        </property>
         <property name="text">
-         <string>cargar</string>
+         <string>Cargar</string>
         </property>
        </widget>
       </item>

@@ -85,7 +85,7 @@ QPushButton:pressed {
 }</string>
     </property>
     <property name="text">
-     <string>tabla de daño</string>
+     <string>Tabla de daño</string>
     </property>
    </widget>
    <widget class="QPushButton" name="reglas">
@@ -133,7 +133,7 @@ QPushButton:pressed {
 }</string>
     </property>
     <property name="text">
-     <string>reglas</string>
+     <string>Reglas</string>
     </property>
    </widget>
    <widget class="QLabel" name="nombre_player">
@@ -159,11 +159,37 @@ QPushButton:pressed {
    <widget class="QPushButton" name="guardar_partida">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>360</y>
-      <width>80</width>
-      <height>24</height>
+      <x>29</x>
+      <y>230</y>
+      <width>94</width>
+      <height>34</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                      stop:0 #c62828, stop:1 #6d0f0f);
+    color: #fff3d6;
+    font-weight: bold;
+    font-size: 13px;
+    border: 2px solid #f5b83d;
+    border-radius: 12px;
+    min-width: 90px;
+    max-width: 90px;
+    min-height: 30px;
+    max-height: 30px;
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                      stop:0 #e53935, stop:1 #8e1414);
+    border: 2px solid #ffd54f;
+}
+
+QPushButton:pressed {
+    background-color: #5a0b0b;
+    padding-top: 2px;
+}</string>
     </property>
     <property name="text">
      <string>Guardar</string>
@@ -172,11 +198,37 @@ QPushButton:pressed {
    <widget class="QPushButton" name="menu">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>320</y>
-      <width>80</width>
-      <height>24</height>
+      <x>30</x>
+      <y>270</y>
+      <width>94</width>
+      <height>34</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                      stop:0 #c62828, stop:1 #6d0f0f);
+    color: #fff3d6;
+    font-weight: bold;
+    font-size: 13px;
+    border: 2px solid #f5b83d;
+    border-radius: 12px;
+    min-width: 90px;
+    max-width: 90px;
+    min-height: 30px;
+    max-height: 30px;
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                      stop:0 #e53935, stop:1 #8e1414);
+    border: 2px solid #ffd54f;
+}
+
+QPushButton:pressed {
+    background-color: #5a0b0b;
+    padding-top: 2px;
+}</string>
     </property>
     <property name="text">
      <string>Menu</string>
