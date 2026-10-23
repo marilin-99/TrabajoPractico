@@ -58,6 +58,7 @@ public:
     void cargar_partida(const partida_guardada &guardada);
 
     void aplicar_configuracion(const Configuracion& config);
+    void mostrar_danios();
 
 private slots:
     void on_reglas_clicked();

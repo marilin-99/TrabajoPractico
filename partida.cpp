@@ -500,6 +500,14 @@ void partida::aplicar_configuracion(const Configuracion &config)
     this->tabla = new tabla_danio_ventana(&this->juego, this);
 }
 
+void partida::mostrar_danios()
+{
+    int danio_ia = this->juego.mostrar_danios_ia();
+    int danio_player = this->juego.mostrar_danios_player();
+
+    ui->mostrador_danio->setText("Hiciste " + QString::number(danio_player) + " de daño \nLa IA te hizo " + QString::number(danio_ia) + " de daño");
+}
+
 
 void partida::actualizar_vida()
 {
@@ -530,6 +538,7 @@ void partida::jugar_carta(int index)
 
     actualizar_vida();
     actualizarVidaIA();
+    mostrar_danios();
 
     habilitar_vivas();
     mostrar_carta_ia();

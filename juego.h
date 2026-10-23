@@ -21,7 +21,6 @@ private:
     int cant_cartas = 5;
     int dificultad_actual = 0; // 1 aleatoria, 2 estratégica, 3 super (0 = sin IA)
     //carta* carta_interfaz_pl;
-
 public:
     juego();
     void set_ia(int dificultad);
@@ -36,6 +35,8 @@ public:
     vector <carta> *getcartas_ia();
     vector <carta> *getcartas_player();
     void aplicar_danio();
+    int mostrar_danios_player();
+    int mostrar_danios_ia();
 
     void carta_interfaz(carta *carta_elegida);
     vector<vector<int> > getTabla_danio() const;

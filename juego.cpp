@@ -126,7 +126,7 @@ juego::~juego()
 
 carta* juego::getcarta_player()
 {
-   return this->player->tirar_carta();
+    return this->player->tirar_carta();
 }
 
 carta* juego::getcarta_ia()
@@ -138,8 +138,6 @@ carta* juego::getcarta_ia()
 const TipoElemento juego::elementos[4] = {TipoElemento::FUEGO, TipoElemento::AGUA, TipoElemento::TIERRA, TipoElemento::VIENTO};
 void juego::repartir_cartas()
 {
-    // Los punteros a cartas apuntan dentro de los vectores: al limpiarlos
-    // quedarían colgando, así que se anulan antes.
     this->carta_player = nullptr;
     this->carta_ia = nullptr;
     this->player->setCarta_elegida(nullptr);
@@ -164,7 +162,6 @@ void juego::repartir_cartas()
 
 void juego::restaurar_cartas(const vector<carta> &cartas_player, const vector<carta> &cartas_ia)
 {
-    // Los punteros apuntan a las cartas viejas: se anulan antes de reemplazarlas
     this->carta_player = nullptr;
     this->carta_ia = nullptr;
     this->player->setCarta_elegida(nullptr);
@@ -199,6 +196,20 @@ void juego::aplicar_danio()
     this->carta_player->recibir_danio(tabla_danio[tipo_ia][tipo_player]);
     this->carta_ia->recibir_danio(tabla_danio[tipo_player][tipo_ia]);
 
+}
+
+int juego::mostrar_danios_player()
+{
+    int tipo_player = static_cast<int>(carta_player->getTipo() );
+    int tipo_ia = static_cast<int>(carta_ia->getTipo() );
+    return tabla_danio[tipo_player][tipo_ia];
+}
+
+int juego::mostrar_danios_ia()
+{
+    int tipo_player = static_cast<int>(carta_player->getTipo() );
+    int tipo_ia = static_cast<int>(carta_ia->getTipo() );
+    return tabla_danio[tipo_ia][tipo_player];
 }
 
 

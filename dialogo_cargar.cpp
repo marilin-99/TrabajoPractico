@@ -10,8 +10,8 @@ dialogo_cargar::dialogo_cargar(const vector<partida_guardada> &partidas, QWidget
     setWindowTitle("Cargar partida");
     setMinimumWidth(560);
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(new QLabel("Elegí la partida que querés continuar:"));
+    QVBoxLayout *ventana_carga = new QVBoxLayout(this);
+    ventana_carga->addWidget(new QLabel("Elegí la partida que querés continuar:"));
 
     // Una línea por partida: nombre - IA - cantidad de cartas
     const char *nombres_ia[] = {"", "IA Aleatoria", "IA Estratégica", "IA Super"};
@@ -24,12 +24,12 @@ dialogo_cargar::dialogo_cargar(const vector<partida_guardada> &partidas, QWidget
                        QString::number(p.cartas_player.size()) + " cartas");
     }
     lista->setCurrentRow(0);        // empieza con la primera seleccionada
-    layout->addWidget(lista);
+    ventana_carga->addWidget(lista);
 
     QDialogButtonBox *botones = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     botones->button(QDialogButtonBox::Ok)->setText("Cargar");
     botones->button(QDialogButtonBox::Cancel)->setText("Cancelar");
-    layout->addWidget(botones);
+    ventana_carga->addWidget(botones);
 
     connect(botones, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(botones, &QDialogButtonBox::rejected, this, &QDialog::reject);
