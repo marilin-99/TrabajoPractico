@@ -1,3 +1,4 @@
+
 #include "carta.h"
 
 void carta::setVida(int newVida)

@@ -7,6 +7,7 @@
 #include "lectorconfiguracion.h"
 #include <QCoreApplication>
 #include <QDebug>
+#include <QStatusBar>
 
 using namespace std;
 MainWindow::MainWindow(QWidget *parent)
@@ -26,13 +27,14 @@ MainWindow::MainWindow(QWidget *parent)
         lector.escribir_archivo(ruta, config);
     }
 
-    qDebug() << QString::fromStdString(lector.mensaje_error());
+    qDebug() << QString::fromStdString(lector.mensaje());
 
     this->juego.aplicar_configuracion(config);
     this->accedePartida->aplicar_configuracion(config);
 
     ui->cantidad_cartas->setValue(config.get_cantidad());
     if(config.tiene_tipo_ia()){
+         this->index = config.get_tipo_ia();
         ui->elegir_IA->setCurrentIndex(config.get_tipo_ia());
     }
 

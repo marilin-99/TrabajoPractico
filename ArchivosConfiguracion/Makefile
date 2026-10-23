@@ -282,7 +282,6 @@ Makefile: ../tp_poo.pro C:/qtnuevo/6.11.0/mingw_64/mkspecs/win32-g++/qmake.conf 
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/qt_config.prf \
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/win32-g++/qmake.conf \
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/exclusive_builds.prf \
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/toolchain.prf \
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/default_pre.prf \
@@ -313,6 +312,7 @@ Makefile: ../tp_poo.pro C:/qtnuevo/6.11.0/mingw_64/mkspecs/win32-g++/qmake.conf 
 		C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Gui.prl \
 		C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Network.prl \
 		C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Core.prl \
+		.qmake.stash \
 		C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/build_pass.prf \
 		../recursos.qrc
 	$(QMAKE) -o Makefile ..\tp_poo.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -528,7 +528,6 @@ C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/qt_functions.prf:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/qt_config.prf:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/win32-g++/qmake.conf:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/exclusive_builds.prf:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/toolchain.prf:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/default_pre.prf:
@@ -559,6 +558,7 @@ C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Multimedia.prl:
 C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Gui.prl:
 C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Network.prl:
 C:/qtnuevo/6.11.0/mingw_64/lib/Qt6Core.prl:
+.qmake.stash:
 C:/qtnuevo/6.11.0/mingw_64/mkspecs/features/build_pass.prf:
 ../recursos.qrc:
 qmake: FORCE
