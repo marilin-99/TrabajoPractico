@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->caja_nombre->setPlaceholderText("Ingrese nombre");
+    ui->caja_nombre->setPlaceholderText("Ingrese nombre del jugador");
     QString nombre = ui->caja_nombre->toPlainText();
     ui->cantidad_cartas->setMinimum(0);
     ui->cantidad_cartas->setValue(0);
