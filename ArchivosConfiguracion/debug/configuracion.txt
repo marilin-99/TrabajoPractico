@@ -2,26 +2,26 @@
 # Formato: clave=valor (las lineas que empiezan con # son comentarios)
 
 # Cantidad de elementos por jugador
-cantidad_elementos=5
+cantidad_elementos=0
 
 # Tipo de IA: 1 = aleatoria, 2 = estrategica, 3 = super
 # Si no se define, el jugador la elige al iniciar la partida.
-tipo_ia=1
+tipo_ia=2
 
-# Tabla de dano: dano=Atacante,Defensor,Valor
-dano=Fuego,Fuego,100
-dano=Fuego,Agua,20
-dano=Fuego,Tierra,50
-dano=Fuego,Viento,35
-dano=Agua,Fuego,50
-dano=Agua,Agua,10
-dano=Agua,Tierra,35
-dano=Agua,Viento,20
-dano=Tierra,Fuego,20
-dano=Tierra,Agua,35
-dano=Tierra,Tierra,10
-dano=Tierra,Viento,50
-dano=Viento,Fuego,35
-dano=Viento,Agua,50
-dano=Viento,Tierra,20
-dano=Viento,Viento,10
+# Tabla de daño: daño=Atacante,Defensor,Valor
+daño=Fuego,Fuego,10
+daño=Fuego,Agua,20
+daño=Fuego,Tierra,50
+daño=Fuego,Viento,35
+daño=Agua,Fuego,50
+daño=Agua,Agua,10
+daño=Agua,Tierra,35
+daño=Agua,Viento,20
+daño=Tierra,Fuego,20
+daño=Tierra,Agua,35
+daño=Tierra,Tierra,10
+daño=Tierra,Viento,50
+daño=Viento,Fuego,35
+daño=Viento,Agua,50
+daño=Viento,Tierra,20
+daño=Viento,Viento,10

@@ -42,14 +42,14 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
     if (config.tiene_tipo_ia()) {
         archivo << "tipo_ia=" << config.get_tipo_ia() << "\n\n";
     } else {
-        archivo << "# tipo_ia=2\n\n";
+        archivo << "tipo_ia=2\n\n";
     }
 
-    archivo << "# Tabla de dano: dano=Atacante,Defensor,Valor\n";
+    archivo << "# Tabla de daño: daño=Atacante,Defensor,Valor\n";
     const auto& tabla = config.get_tabla();
     for (size_t i = 0; i < tabla.size(); ++i) {
         for (size_t j = 0; j < tabla[i].size(); ++j) {
-            archivo << "dano=" << nombres_tipos[i] << "," << nombres_tipos[j] << ","
+            archivo << "daño=" << nombres_tipos[i] << "," << nombres_tipos[j] << ","
                     << tabla[i][j] << "\n";
         }
     }
@@ -94,7 +94,7 @@ void LectorConfiguracion::procesar_linea(Configuracion& config, const string& li
             config.cantidad_elementos(stoi(valor));
         } else if (clave == "tipo_ia") {
             config.tipo_ia(stoi(valor));
-        } else if (clave == "dano") {
+        } else if (clave == "daño") {
             interpretar_danio(config, valor);
         } else {
             ok = ERROR_FORMATO;
@@ -104,13 +104,13 @@ void LectorConfiguracion::procesar_linea(Configuracion& config, const string& li
     }
 }
 
-// dano=Atacante,Defensor,Valor   (ej: dano=Agua,Fuego,50)
+// dano=Atacante,Defensor,Valor   (ej: daño=Agua,Fuego,50)
 void LectorConfiguracion::interpretar_danio(Configuracion& config, const string& valor)
 {
-    stringstream ss(valor);
+    stringstream val(valor);
     string atacante, defensor, danio;
 
-    if (!getline(ss, atacante, ',') || !getline(ss, defensor, ',') || !getline(ss, danio)) {
+    if (!getline(val, atacante, ',') || !getline(val, defensor, ',') || !getline(val, danio)) {
         ok = ERROR_FORMATO;
         return;
     }

@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->cantidad_cartas->setValue(config.get_cantidad());
     if(config.tiene_tipo_ia()){
-         this->index = config.get_tipo_ia();
+       // this->index = config.get_tipo_ia();
         ui->elegir_IA->setCurrentIndex(config.get_tipo_ia());
     }
 

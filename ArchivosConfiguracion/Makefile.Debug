@@ -2436,7 +2436,13 @@ debug/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QCoreApplication \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtCore/QDebug \
 		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QStatusBar \
-		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstatusbar.h
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qstatusbar.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/QLineEdit \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtWidgets/qlineedit.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextcursor.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextformat.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qpen.h \
+		C:/qtnuevo/6.11.0/mingw_64/include/QtGui/qtextoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\mainwindow.cpp
 
 debug/partida.o: ../partida.cpp ../partida.h \
