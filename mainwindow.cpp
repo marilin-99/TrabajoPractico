@@ -7,10 +7,10 @@
 #include "lectorconfiguracion.h"
 #include <QCoreApplication>
 #include <QDebug>
-
 #include <QStatusBar>
-
 #include <QLineEdit>
+#include <QApplication>
+#include <QTimer>
 
 
 using namespace std;
@@ -23,8 +23,15 @@ MainWindow::MainWindow(QWidget *parent)
     QString nombre = ui->caja_nombre->toPlainText();
     ui->cantidad_cartas->setMinimum(0);
     ui->cantidad_cartas->setValue(0);
-    ui->cantidad_cartas->setSpecialValueText("Ingrese cantidad de cartas");
-    ui->cantidad_cartas->findChild<QLineEdit*>()->setReadOnly(true);
+
+    QLineEdit *campo = ui->cantidad_cartas->findChild<QLineEdit *>();
+    campo->setPlaceholderText("Ingrese cantidad de cartas");
+    ui->cantidad_cartas->setKeyboardTracking(false);
+    QTimer::singleShot(0, ui->cantidad_cartas, &QAbstractSpinBox::clear);
+    connect(ui->cantidad_cartas, &QSpinBox::editingFinished, this, [this, campo]() {
+        if (campo->text() == "0")
+            ui->cantidad_cartas->clear();
+    });
 
     ui->verticalSpacer_7->changeSize(20, 150, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalSpacer_5->changeSize(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);

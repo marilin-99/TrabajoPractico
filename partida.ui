@@ -159,8 +159,8 @@ QPushButton:pressed {
    <widget class="QPushButton" name="guardar_partida">
     <property name="geometry">
      <rect>
-      <x>29</x>
-      <y>230</y>
+      <x>410</x>
+      <y>20</y>
       <width>94</width>
       <height>34</height>
      </rect>
@@ -198,8 +198,8 @@ QPushButton:pressed {
    <widget class="QPushButton" name="menu">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>270</y>
+      <x>530</x>
+      <y>20</y>
       <width>94</width>
       <height>34</height>
      </rect>

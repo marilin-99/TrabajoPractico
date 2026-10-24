@@ -54,6 +54,14 @@ partida::partida(QWidget *parent)
     // Espacio inferior
     layout->setRowStretch(7, 1);
 
+    ui->guardar_partida->move(577, 20);
+    ui->menu->move(697, 20);
+
+    layout->addWidget(ui->mostrador_danio, 6, 0, 1, 7,
+                      Qt::AlignRight | Qt::AlignBottom);
+
+    ui->mostrador_danio->setMinimumSize(200, 70);
+    ui->mostrador_danio->setMaximumSize(300, 100);
     ui->centralwidget->setLayout(layout);
 }
 
@@ -499,18 +507,22 @@ void partida::mostrar_danios()
     int danio_ia = this->juego.mostrar_danios_ia();
     int danio_player = this->juego.mostrar_danios_player();
 
-    ui->mostrador_danio->setText("Hiciste " + QString::number(danio_player) + " de daño \nLa IA te hizo " + QString::number(danio_ia) + " de daño");
+    ui->mostrador_danio->setText(
+        "<span style='color:#2e7d32;'>⚔ Tu golpe: <span style='font-size:20px;'>-" +
+        QString::number(danio_player) + "</span></span><br>"
+                                        "<span style='color:#b71c1c;'>🛡 Golpe de la IA: <span style='font-size:20px;'>-" +
+        QString::number(danio_ia) + "</span></span>"
+        );
     ui->mostrador_danio->setAlignment(Qt::AlignCenter);
     ui->mostrador_danio->setWordWrap(true);
-    ui->mostrador_danio->setMinimumSize(260, 90);
     ui->mostrador_danio->setStyleSheet(
         "QLabel {"
         "  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
-        "                    stop:0 #2b2d42, stop:1 #14151f);"
-        "  color: #f1f1f1;"
-        "  border: 2px solid #ef233c;"
-        "  border-radius: 12px;"
-        "  padding: 10px;"
+        "                    stop:0 #fff3d6, stop:1 #e8c88a);"
+        "  color: #4a2c00;"
+        "  border: 3px solid #7a4a00;"
+        "  border-radius: 16px;"
+        "  padding: 6px 14px;"
         "  font-size: 16px;"
         "  font-weight: bold;"
         "}"
@@ -521,8 +533,6 @@ void partida::mostrar_danios()
     sombra->setOffset(0, 4);
     sombra->setColor(QColor(0, 0, 0, 160));
     ui->mostrador_danio->setGraphicsEffect(sombra);
-    ui->mostrador_danio->setGeometry(940, 375, 280, 90);
-    ui->mostrador_danio->raise();
 }
 
 void partida::actualizar_vida()
@@ -593,8 +603,34 @@ void partida::on_guardar_partida_clicked()
 
 void partida::setNombre(const QString &newNombre)
 {
+
     this->nombre = newNombre;
-    this->ui->nombre_player->setText(newNombre);
+
+    this->ui->nombre_player->setText(
+        "<span style='font-size:13px; color:#7a4a00;'>Jugador Actual: </span>"
+        "<span style='font-size:18px; font-weight:bold;'>" + newNombre.toHtmlEscaped() + "</span>"
+        );
+
+    ui->nombre_player->setAlignment(Qt::AlignCenter);
+    ui->nombre_player->setMinimumSize(300, 48);
+    ui->nombre_player->setMaximumHeight(48);
+    ui->nombre_player->setStyleSheet(
+        "QLabel {"
+        "  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "                    stop:0 #fff3d6, stop:1 #e8c88a);"
+        "  color: #4a2c00;"
+        "  border: 3px solid #7a4a00;"
+        "  border-radius: 16px;"
+        "  padding: 0px 14px;"
+        "}"
+        );
+
+    auto *sombra = new QGraphicsDropShadowEffect(this);
+    sombra->setBlurRadius(18);
+    sombra->setOffset(0, 4);
+    sombra->setColor(QColor(0, 0, 0, 170));
+    ui->nombre_player->setGraphicsEffect(sombra);
+
 }
 
 void partida::setCant_cartas(int newCant_cartas)
