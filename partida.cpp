@@ -528,7 +528,7 @@ void partida::mostrar_danios()
     sombra->setColor(QColor(0, 0, 0, 160));
     ui->mostrador_danio->setGraphicsEffect(sombra);
     ui->mostrador_danio->setGeometry(940, 375, 280, 90);
-    ui->mostrador_danio->move((width() - ui->mostrador_danio->width()) / 2, 270);
+    ui->mostrador_danio->raise();
 }
 
 
