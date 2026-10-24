@@ -10,7 +10,7 @@ Configuracion::Configuracion(const Matriz &tablaPorDefector, int cantidadElement
 void Configuracion::cantidad_elementos(int n)
 {
     if(n < 1){
-        throw;
+        throw invalid_argument("cantida de cartas no puede ser menor de 1");;
     }
     this->cant_elementos = n;
 }
