@@ -506,6 +506,29 @@ void partida::mostrar_danios()
     int danio_player = this->juego.mostrar_danios_player();
 
     ui->mostrador_danio->setText("Hiciste " + QString::number(danio_player) + " de daño \nLa IA te hizo " + QString::number(danio_ia) + " de daño");
+    ui->mostrador_danio->setAlignment(Qt::AlignCenter);
+    ui->mostrador_danio->setWordWrap(true);
+    ui->mostrador_danio->setMinimumSize(260, 90);
+    ui->mostrador_danio->setStyleSheet(
+        "QLabel {"
+        "  background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "                    stop:0 #2b2d42, stop:1 #14151f);"
+        "  color: #f1f1f1;"
+        "  border: 2px solid #ef233c;"
+        "  border-radius: 12px;"
+        "  padding: 10px;"
+        "  font-size: 16px;"
+        "  font-weight: bold;"
+        "}"
+        );
+
+    auto *sombra = new QGraphicsDropShadowEffect(this);
+    sombra->setBlurRadius(20);
+    sombra->setOffset(0, 4);
+    sombra->setColor(QColor(0, 0, 0, 160));
+    ui->mostrador_danio->setGraphicsEffect(sombra);
+    ui->mostrador_danio->setGeometry(940, 375, 280, 90);
+    ui->mostrador_danio->move((width() - ui->mostrador_danio->width()) / 2, 270);
 }
 
 
