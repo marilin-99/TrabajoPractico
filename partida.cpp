@@ -431,11 +431,6 @@ QMessageBox QPushButton {
 
 }
 
-
-
-
-
-
 void partida::asignar_cartas()
 {
     juego.setCant_cartas(cant_cartas);
@@ -471,7 +466,6 @@ void partida::cargar_iconos_cartas()
         botonesCartas[i]->setIcon(QIcon(imagen));
     }
 }
-
 
 void partida::cargar_partida(const partida_guardada &guardada)
 {
@@ -531,7 +525,6 @@ void partida::mostrar_danios()
     ui->mostrador_danio->raise();
 }
 
-
 void partida::actualizar_vida()
 {
     vector<carta> *cartas = this->juego.getcartas_player();
@@ -542,13 +535,10 @@ void partida::actualizar_vida()
     }
 }
 
-
-
 void partida::setDificultad_ia(int newDificultad_ia)
 {
     this->juego.set_ia(newDificultad_ia);
 }
-
 
 void partida::jugar_carta(int index)
 {
@@ -612,12 +602,8 @@ void partida::setCant_cartas(int newCant_cartas)
     cant_cartas = qBound(1, newCant_cartas, 50);
 }
 
-
-
-
 void partida::on_menu_clicked()
 {
     this->hide();
     this->parentWidget()->showMaximized();
 }
-

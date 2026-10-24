@@ -1,18 +1,16 @@
 #include "guardado.h"
+
 #include <QCoreApplication>
 #include <QDataStream>
 #include <QDir>
 #include <QFile>
 
-// Carpeta "partidas", dentro de la carpeta donde está el juego
-static QString carpeta()
+QString guardado::carpeta()
 {
     return QCoreApplication::applicationDirPath() + "/partidas";
 }
 
-// El archivo se llama partida_<nombre>.bin.
-// Lo que no es letra ni número se cambia por "_" para que sea un nombre de archivo válido.
-static QString ruta_archivo(const QString &nombre)
+QString guardado::ruta_archivo(const QString &nombre)
 {
     QString limpio;
     for (QChar c : nombre.left(40)) {
@@ -27,30 +25,25 @@ static QString ruta_archivo(const QString &nombre)
     return carpeta() + "/partida_" + limpio + ".bin";
 }
 
-// De cada carta se guarda el tipo y la vida
-static void escribir_cartas(QDataStream &out, const vector<carta> &cartas)
+void guardado::escribir_cartas(QDataStream &out, const vector<carta> &cartas)
 {
     for (const carta &c : cartas)
         out << static_cast<int>(c.getTipo()) << c.get_vida();
 }
 
-// Lee 'cantidad' cartas. Devuelve false si los datos están mal
-// o si no queda ninguna carta con vida (esa partida ya no se puede continuar).
-static bool leer_cartas(QDataStream &in, int cantidad, vector<carta> &cartas)
+bool guardado::leer_cartas(QDataStream &in, int cantidad, vector<carta> &cartas)
 {
     bool hay_viva = false;
-
     for (int i = 0; i < cantidad; i++) {
         int tipo = 0;
         int vida = 0;
         in >> tipo >> vida;
-
         if (in.status() != QDataStream::Ok || tipo < 0 || tipo > 3 || vida < 0 || vida > 100)
             return false;
 
         carta c(static_cast<TipoElemento>(tipo));
         c.setVida(vida);
-        c.cambia_estado();      // si la vida es 0, la carta queda eliminada
+        c.cambia_estado(); // si la vida es 0, la carta queda eliminada
         cartas.push_back(c);
 
         if (vida > 0)
@@ -59,9 +52,7 @@ static bool leer_cartas(QDataStream &in, int cantidad, vector<carta> &cartas)
     return hay_viva;
 }
 
-// Lee un archivo de partida. Si está dañado o lo modificaron a mano devuelve false,
-// así el juego no se rompe con datos incorrectos.
-static bool leer_partida(const QString &ruta, partida_guardada &partida)
+bool guardado::leer_partida(const QString &ruta, partida_guardada &partida)
 {
     QFile archivo(ruta);
     if (!archivo.open(QIODevice::ReadOnly))
@@ -70,25 +61,22 @@ static bool leer_partida(const QString &ruta, partida_guardada &partida)
     QDataStream in(&archivo);
     int cantidad = 0;
     in >> partida.nombre >> partida.dificultad >> cantidad;
-
     if (in.status() != QDataStream::Ok || partida.dificultad < 1 || partida.dificultad > 3
         || cantidad < 1 || cantidad > 50)
         return false;
 
     return leer_cartas(in, cantidad, partida.cartas_player)
-        && leer_cartas(in, cantidad, partida.cartas_ia);
+           && leer_cartas(in, cantidad, partida.cartas_ia);
 }
 
 bool guardado::guardar(const partida_guardada &partida)
 {
-    QDir().mkpath(carpeta());       // crea la carpeta si no existe
+    QDir().mkpath(carpeta()); // crea la carpeta si no existe
 
     QFile archivo(ruta_archivo(partida.nombre));
     if (!archivo.open(QIODevice::WriteOnly))
         return false;
 
-    // Orden en el archivo: nombre, dificultad, cantidad de cartas,
-    // cartas del jugador y cartas de la IA
     QDataStream out(&archivo);
     out << partida.nombre << partida.dificultad << static_cast<int>(partida.cartas_player.size());
     escribir_cartas(out, partida.cartas_player);
@@ -103,7 +91,6 @@ vector<partida_guardada> guardado::listar()
 
     QDir dir(carpeta());
     QStringList archivos = dir.entryList(QStringList() << "partida_*.bin", QDir::Files);
-
     for (const QString &nombre_archivo : archivos) {
         partida_guardada p;
         if (leer_partida(dir.filePath(nombre_archivo), p))
