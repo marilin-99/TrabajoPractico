@@ -51,14 +51,13 @@ MainWindow::MainWindow(QWidget *parent)
         lector.escribir_archivo(ruta, config);
     }
 
-    qDebug() << QString::fromStdString(lector.mensaje());
+    this->statusBar()->showMessage(QString::fromStdString(lector.mensaje()), 5000);
 
     this->juego.aplicar_configuracion(config);
     this->accedePartida->aplicar_configuracion(config);
 
     ui->cantidad_cartas->setValue(config.get_cantidad());
     if(config.tiene_tipo_ia()){
-       // this->index = config.get_tipo_ia();
         ui->elegir_IA->setCurrentIndex(config.get_tipo_ia());
     }
 

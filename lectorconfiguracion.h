@@ -18,7 +18,6 @@ public:
 
     void escribir_archivo(const string& ruta, const Configuracion& config);
 
-    Codigo get_codigo() const;
     string mensaje() const;
 
 private:

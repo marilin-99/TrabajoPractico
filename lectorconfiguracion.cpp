@@ -57,11 +57,6 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
     ok = OK;
 }
 
-Codigo LectorConfiguracion::get_codigo() const
-{
-    return ok;
-}
-
 string LectorConfiguracion::mensaje() const
 {
     // Mismo orden que el enum Codigo
