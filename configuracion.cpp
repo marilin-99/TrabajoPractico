@@ -9,7 +9,7 @@ Configuracion::Configuracion(const Matriz &tablaPorDefector, int cantidadElement
 
 void Configuracion::cantidad_elementos(int n)
 {
-    if(n < 1){
+    if(n < 0){
         throw invalid_argument("cantida de cartas no puede ser menor de 1");;
     }
     this->cant_elementos = n;
@@ -36,7 +36,7 @@ int Configuracion::get_tipo_ia() const
 
 bool Configuracion::tiene_tipo_ia() const
 {
-    return this->ia_elegida != 0;
+    return this->ia_elegida >= 0;
 }
 
 const Configuracion::Matriz &Configuracion::get_tabla() const
