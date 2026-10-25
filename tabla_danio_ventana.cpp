@@ -45,7 +45,7 @@ tabla_danio_ventana::tabla_danio_ventana(juego* tabla, QWidget *parent)
         "QHeaderView::section { font-size: 40px; font-weight: bold; border: 1px solid black; }"
         );
 
-    // Estilo extra: se suma al que ya existe
+
     ui->tablaDanio->setStyleSheet(ui->tablaDanio->styleSheet() +
                                   "QTableWidget {"
                                   "  background-color: #fff3d6;"
@@ -69,7 +69,7 @@ tabla_danio_ventana::tabla_danio_ventana(juego* tabla, QWidget *parent)
                                   "}"
                                   );
 
-    // Centrar y colorear cada celda según el daño
+
     for (int i = 0; i < ui->tablaDanio->rowCount(); i++) {
         for (int j = 0; j < ui->tablaDanio->columnCount(); j++) {
             QTableWidgetItem *item = ui->tablaDanio->item(i, j);
