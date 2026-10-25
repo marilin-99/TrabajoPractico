@@ -73,6 +73,7 @@ int juego::validar_partida()
     bool player_perdio = true;
     bool ia_perdio = true;
 
+
     // Revisar todas las cartas del jugador.
     for (int i = 0; i < cartas_player->size(); i++)
     {
