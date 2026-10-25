@@ -93,7 +93,6 @@ void MainWindow::iniciar_partida()
 }
 
 
-
 void MainWindow::on_cargar_partida_clicked()
 {
     vector<partida_guardada> partidas = guardado::listar();
@@ -112,10 +111,8 @@ void MainWindow::on_cargar_partida_clicked()
 }
 
 
-
 void MainWindow::on_tabla_danio_boton_clicked()
 {
-    // Se crea una sola vez (con parent, Qt la libera) en lugar de una ventana nueva por clic
     if (!this->tabla)
         this->tabla = new tabla_danio_ventana(&this->juego, this);
     this->tabla->show();

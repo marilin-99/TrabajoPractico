@@ -19,9 +19,8 @@ public:
 
     carta *getcarta_player() const;
 
-    vector<vector<int> > getTabla_danio() const;
+    vector<vector<int>> getTabla_danio() const;
     vector <carta*> vectorcartasvivas();
     void setTabla_danio(const vector<vector<int> > &newTabla_danio);
 };
-
 #endif // IA_H
