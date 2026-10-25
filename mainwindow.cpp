@@ -51,14 +51,13 @@ MainWindow::MainWindow(QWidget *parent)
         lector.escribir_archivo(ruta, config);
     }
 
-    qDebug() << QString::fromStdString(lector.mensaje());
+    this->statusBar()->showMessage(QString::fromStdString(lector.mensaje()), 5000);
 
     this->juego.aplicar_configuracion(config);
     this->accedePartida->aplicar_configuracion(config);
 
     ui->cantidad_cartas->setValue(config.get_cantidad());
     if(config.tiene_tipo_ia()){
-       // this->index = config.get_tipo_ia();
         ui->elegir_IA->setCurrentIndex(config.get_tipo_ia());
     }
 
@@ -94,7 +93,6 @@ void MainWindow::iniciar_partida()
 }
 
 
-
 void MainWindow::on_cargar_partida_clicked()
 {
     vector<partida_guardada> partidas = guardado::listar();
@@ -113,10 +111,8 @@ void MainWindow::on_cargar_partida_clicked()
 }
 
 
-
 void MainWindow::on_tabla_danio_boton_clicked()
 {
-    // Se crea una sola vez (con parent, Qt la libera) en lugar de una ventana nueva por clic
     if (!this->tabla)
         this->tabla = new tabla_danio_ventana(&this->juego, this);
     this->tabla->show();

@@ -22,7 +22,7 @@ int Configuracion::get_cantidad() const
 
 void Configuracion::tipo_ia(int ia)
 {
-    if((ia < 1 ) || (ia > 3)){
+    if((ia < 0 ) || (ia > 3)){
         throw invalid_argument("tipo_ia debe estar entre 1 y 3");
 
     }

@@ -37,7 +37,7 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
     archivo << "# Cantidad de elementos por jugador\n";
     archivo << "cantidad_elementos=" << config.get_cantidad() << "\n\n";
 
-    archivo << "# Tipo de IA: 1 = aleatoria, 2 = estrategica, 3 = super\n";
+    archivo << "# Tipo de IA: 0 = ia no seleccionada, 1 = aleatoria, 2 = estrategica, 3 = super\n";
     archivo << "# Si no se define, el jugador la elige al iniciar la partida.\n";
     if (config.tiene_tipo_ia()) {
         archivo << "tipo_ia=" << config.get_tipo_ia() << "\n\n";
@@ -55,11 +55,6 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
     }
 
     ok = OK;
-}
-
-Codigo LectorConfiguracion::get_codigo() const
-{
-    return ok;
 }
 
 string LectorConfiguracion::mensaje() const
