@@ -12,28 +12,27 @@ carta *ia_super::tirar_carta()
     // Buscar la carta con mayor ventaja
     carta* mejor_carta=nullptr;
     int menor = 999;
-    int mayor = 0;
     vector<vector<int>> tabla_danio = this->getTabla_danio();
     carta* carta_ia;
     int vida_carta_player = carta_player->get_vida();
 
     //buscar las cartas que mas daño hagan y de esas tiene que elegir la que menos daño reciba si puede matar a la carta del jugador
 
-    vector <carta*> cartas_distinto_tipo;
+    //vector <carta*> cartas_distinto_tipo;
     vector <carta*> cartas_asecinas;
 
     //busca cartas de distinto tipo al del player
-    for(size_t i = 0; i < cartas_ia.size(); i++)
-    {
-        carta_ia = cartas_ia[i];
-        int tipo_ia = static_cast<int>(carta_ia->getTipo());
-        if(tipo_ia!=tipo_player){
-            cartas_distinto_tipo.push_back(carta_ia);
-        }
-    }
+    //for(size_t i = 0; i < cartas_ia.size(); i++)
+    //{
+     //   carta_ia = cartas_ia[i];
+       // int tipo_ia = static_cast<int>(carta_ia->getTipo());
+        //if(tipo_ia!=tipo_player){
+         //   cartas_distinto_tipo.push_back(carta_ia);
+       // }
+    //}
     //busca las cartas que pueden matar a la del player :)
-    for(int i=0; i < cartas_distinto_tipo.size(); i++){
-        carta_ia = cartas_distinto_tipo[i];
+    for(int i=0; i < cartas_ia.size(); i++){
+        carta_ia = cartas_ia[i];
         int tipo_ia = static_cast<int>(carta_ia->getTipo());
         if(tabla_danio[tipo_ia][tipo_player] >= vida_carta_player){
             cartas_asecinas.push_back(carta_ia);
