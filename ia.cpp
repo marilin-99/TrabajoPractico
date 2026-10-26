@@ -13,7 +13,7 @@ vector<vector<int> > ia::getTabla_danio() const
     return tabla_danio;
 }
 
-
+//devuelve vector cartas vivas
 vector<carta*> ia::vectorcartasvivas()
 {
     vector<carta*> cartas_vivas;
@@ -42,7 +42,7 @@ ia::ia() {
 
 ia::~ia()
 {
-    // Las cartas viven en el vector que hereda de jugador y se liberan solas.
+    // Las cartas viven en el vector que hereda de jugador y se liberan solas
 }
 
 void ia::setIa_dificultad(int newIa_dificultad)

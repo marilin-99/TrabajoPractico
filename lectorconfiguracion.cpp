@@ -42,7 +42,7 @@ void LectorConfiguracion::escribir_archivo(const string& ruta, const Configuraci
     if (config.tiene_tipo_ia()) {
         archivo << "tipo_ia=" << config.get_tipo_ia() << "\n\n";
     } else {
-        archivo << "tipo_ia=2\n\n";
+        archivo << "tipo_ia=0\n\n";
     }
 
     archivo << "# Tabla de daño: daño=Atacante,Defensor,Valor\n";

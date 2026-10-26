@@ -36,7 +36,7 @@ int Configuracion::get_tipo_ia() const
 
 bool Configuracion::tiene_tipo_ia() const
 {
-    return this->ia_elegida >= 0;
+    return this->ia_elegida != 0;
 }
 
 const Configuracion::Matriz &Configuracion::get_tabla() const
